@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@android:color/white"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.dell.woof.ui.DashBoardActivity">
+    <TextView
+        android:id="@+id/title"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You are on Dashboard"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textAppearance="?android:textAppearanceMedium"/>
+    <RelativeLayout
+        android:layout_below="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btnVeterinary"
+            android:background="#FF5733"
+            android:layout_width="175dp"
+            android:layout_height="160dp"
+            android:textAllCaps="false"
+            android:text="Veterinary"
+            android:layout_toLeftOf="@+id/btnSpa"
+            android:layout_toStartOf="@+id/btnSpa" />
+        <Button
+            android:id="@+id/btnSpa"
+            android:layout_width="175dp"
+            android:layout_height="160dp"
+            android:text="Spa"
+            android:textAllCaps="false"
+            android:background="#C4FF33"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignLeft="@+id/btnLovenest"
+            android:layout_alignStart="@+id/btnLovenest" />
+        <Button
+            android:id="@+id/btnKennel"
+            android:background="#33FFB2"
+            android:layout_width="175dp"
+            android:layout_height="160dp"
+            android:textAllCaps="false"
+            android:text="Kennel"
+            android:layout_below="@+id/btnVeterinary"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+        <Button
+            android:id="@+id/btnLovenest"
+            android:layout_below="@+id/btnSpa"
+            android:background="#DA33FF"
+            android:layout_width="175dp"
+            android:layout_height="160dp"
+            android:textAllCaps="false"
+            android:text="Lovenest"
+            android:layout_toRightOf="@+id/btnKennel"
+            android:layout_toEndOf="@+id/btnKennel" />
+        <Button
+            android:id="@+id/btnStore"
+            android:background="#FF3374"
+            android:layout_below="@+id/btnLovenest"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:textAllCaps="false"
+            android:text="Store"/>
+    </RelativeLayout>
+</RelativeLayout>

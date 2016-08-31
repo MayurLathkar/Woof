@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
+
+    <TextView
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_previous_month_selector" />
+
+    <TextView
+        android:id="@+id/selected_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/back_button"
+        android:text="13"
+        android:textAlignment="center"
+        android:textColor="#94ffcf"
+        android:textSize="60sp" />
+
+    <TextView
+        android:id="@+id/selected_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/selected_date"
+        android:text="Tuesday"
+        android:textAlignment="center"
+        android:textColor="#94ffcf"
+        android:textSize="40sp" />
+
+    <com.example.dell.woof.views.CustomCalendarView
+        android:id="@+id/calender_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/selected_day">
+    </com.example.dell.woof.views.CustomCalendarView>
+
+    <Button
+        android:id="@+id/take_a_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#ff685c"
+        android:text="Take a Dating ->"
+        android:textColor="#fffcfc" />
+
+</RelativeLayout>

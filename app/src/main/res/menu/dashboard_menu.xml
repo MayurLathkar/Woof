@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.DoctorsActivity">
+
+    <item
+        android:id="@+id/action_notify"
+        android:icon="@drawable/notify"
+        android:title="notify"
+        android:visible="true"
+        app:showAsAction="always"/>
+    <item android:id="@+id/action_search"
+        android:icon="@drawable/homelogo"
+        android:visible="true"
+        android:title="Dashboard"
+        app:showAsAction="always"></item>
+</menu>

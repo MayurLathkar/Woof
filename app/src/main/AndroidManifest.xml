@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.dell.woof">
+
+    <uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="com.example.googlemaps.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <permission
+        android:name="com.example.googlemaps.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <application
+        android:name=".WoofApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="Woof"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <uses-library android:name="com.google.android.maps" />
+
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+
+        <activity android:name=".ui.LoginActivity" android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.DoctorsActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.DoctorDetailsActivity" />
+        <activity android:name=".ui.PetDetailsActivity" />
+        <activity android:name=".ui.SignUpActivity" />
+        <activity android:name=".ui.PuppyDetailsActivity" />
+        <activity android:name=".ui.CompleteUserDetails" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".ui.OtpValidationActivity" />
+        <activity android:name=".ui.DashBoardActivity"/>
+        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.ShoppingActivity"/>
+        <activity android:name=".ui.ShoppingCartActivity"/>
+        <activity android:name=".ui.DogProfileActivity" android:windowSoftInputMode="adjustPan" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.DogProfileListActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".ui.CalenderActivity"/>
+
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="@string/google_map_id" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+    </application>
+</manifest>

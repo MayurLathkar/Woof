@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@android:color/white"
+    style="@style/marker"
+    android:padding="6dp"
+    android:layout_height="match_parent">
+    <com.android.volley.toolbox.NetworkImageView
+        android:layout_margin="8dp"
+        android:id="@+id/icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/signup_icon"/>
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_toRightOf="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="@android:color/black"
+            android:text="Puppy Pet Clinics"/>
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:text="Time: 9 Am to 8 Pm"></TextView>
+    </LinearLayout>
+</RelativeLayout>

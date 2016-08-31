@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#3b5998</color>
+
+    <!--Calender color-->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#222222</color>
+    <color name="day_disabled_background_color">#F1F5F8</color>
+    <color name="day_disabled_text_color">#6cc9d4</color>
+    <color name="selected_day_background">#03A7E9</color>
+    <color name="current_day_of_month">#03A7E9</color>
+    <color name="transaparent">@android:color/transparent</color>
+    <color name="selected_day_color">#fbfd00</color>
+    <color name="calender_title_layout_bg_color">#2034e43e</color>
+
+    <!--Swipe card-->
+    <color name="bel_red_text">#F37B61</color>
+    <color name="bel_grey_text">#4A4C54</color>
+    <color name="bel_lightgrey_text">#72747A</color>
+    <color name="background_material_light">#f4f5f9</color>
+</resources>

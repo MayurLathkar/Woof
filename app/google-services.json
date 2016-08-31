@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "752938235688",
+    "project_id": "woof-c92a8"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752938235688:android:fabbfbb9fe581e59",
+        "android_client_info": {
+          "package_name": "com.example.dell.woof"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752938235688-km9jgh74tc7jb68tf2bj2kfr4g3rutqs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dell.woof",
+            "certificate_hash": "85CC2FD6AFE7BA00DB77CD3D0D939C3EED9611E9"
+          }
+        },
+        {
+          "client_id": "752938235688-d9qfiuo0e3ahalu4jh20403gt5a4co2u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvCjpG6r8T4IWLM-6extODmo759YYKBls"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
