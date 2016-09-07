@@ -11,7 +11,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.PopupOverlay">
+        app:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -19,8 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/white"
             app:navigationIcon="@drawable/navi"
-            android:layout_gravity="center"
-            app:popupTheme="@style/AppTheme.AppBarOverlay" />
+            android:layout_gravity="center" />
 
         <com.example.dell.woof.ui.SlidingTabLayout
             android:id="@+id/tabs"

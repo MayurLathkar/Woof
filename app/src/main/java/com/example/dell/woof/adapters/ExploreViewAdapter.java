@@ -57,7 +57,8 @@ public class ExploreViewAdapter extends RecyclerView.Adapter<ExploreViewAdapter.
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.title.setText(doctorsDetails.get(position).getDtrName());
-        holder.details.setText(doctorsDetails.get(position).getDtrDetails()+"\n"+doctorsDetails.get(position).getDtrAddress()+"\n"+doctorsDetails.get(position).getDtrNumber());
+        holder.details.setText(doctorsDetails.get(position).getDtrDetails()+"\n"+doctorsDetails.get(position).getDtrAddress());
+        holder.phone.setText(doctorsDetails.get(position).getDtrNumber());
         holder.profile.setImageURI(Uri.parse(doctorsDetails.get(position).getDtrImage()));
 
         layout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
@@ -84,7 +85,7 @@ public class ExploreViewAdapter extends RecyclerView.Adapter<ExploreViewAdapter.
 
         private View currentView;
         private TextView title;
-        private TextView details;
+        private TextView details, phone;
         private CircleImageView profile;
 
         public ViewHolder(View itemView){
@@ -93,6 +94,7 @@ public class ExploreViewAdapter extends RecyclerView.Adapter<ExploreViewAdapter.
             title = (TextView) itemView.findViewById(R.id.tvTitle);
             details = (TextView) itemView.findViewById(R.id.tvDetails);
             profile = (CircleImageView) itemView.findViewById(R.id.ivProfile);
+            phone = (TextView) itemView.findViewById(R.id.tvPhone);
         }
     }
 }

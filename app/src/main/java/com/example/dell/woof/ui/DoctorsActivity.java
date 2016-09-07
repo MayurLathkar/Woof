@@ -41,6 +41,7 @@ public class DoctorsActivity extends AppCompatActivity {
         viewPager = (NonSwipeableViewPager) findViewById(R.id.viewPager);
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
+        tabs.setSelectedIndicatorColors(getResources().getColor(R.color.white));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

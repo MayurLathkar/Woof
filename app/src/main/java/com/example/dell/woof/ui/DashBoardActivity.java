@@ -1,13 +1,16 @@
 package com.example.dell.woof.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Toast;
 
@@ -46,15 +49,10 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         setContentView(R.layout.activity_dash_board);
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        try {
+            isProviderEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
 
-
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
 
         findViewById(R.id.btnVeterinary).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,16 +105,48 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 finish();
             }
         });
+
+        if(!isProviderEnabled) {
+            // notify user
+            AlertDialog.Builder dialog = new AlertDialog.Builder(DashBoardActivity.this);
+            dialog.setMessage("Network not enabled");
+            dialog.setPositiveButton("Open location settings", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    // TODO Auto-generated method stub
+                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(myIntent);
+                    //get gps
+                }
+            });
+            dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
+            dialog.show();
+        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
         mGoogleApiClient.connect();
     }
 
     @Override
     public void onLocationChanged(Location location) {
+        mLastLocation = location;
     }
 
     @Override
@@ -140,6 +170,7 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         mLocationRequest.setFastestInterval(100000); //60 seconds
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
+        if (mLastLocation != null)
         Toast.makeText(DashBoardActivity.this, " "+mLastLocation.getLatitude()+" "+mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
 
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.dell.woof.R;
+import com.example.dell.woof.WoofApplication;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -15,15 +16,20 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent mainIntent = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(mainIntent);
-                finish();
-            }
-        }, SPLASH_DISPLAY_LENGTH);
+        if (WoofApplication.getWoofApplication().getCurrentUser() != null){
+            Intent intent = new Intent(SplashActivity.this, DashBoardActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    Intent mainIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(mainIntent);
+                    finish();
+                }
+            }, SPLASH_DISPLAY_LENGTH);
+        }
     }
 }

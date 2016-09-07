@@ -73,6 +73,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                 if (currentProfile != null){
                     currentUser.setUserName(currentProfile.getName());
                     currentUser.setUserProfileImage(currentProfile.getProfilePictureUri(400, 400).toString());
+                    currentUser.setUserID(currentProfile.getId());
                 }
                 GraphRequest request = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
@@ -82,7 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
                                     hideProgressDialog();
                                     currentUser.setUserEmail(object.getString("email"));
                                     WoofApplication.getWoofApplication().initializeUser(currentUser);
-                                    Intent intent = new Intent(LoginActivity.this, CompleteUserDetails.class);
+                                    Intent intent = new Intent(LoginActivity.this, DashBoardActivity.class);
                                     startActivity(intent);
                                     finish();
                                 } catch (JSONException e) {
