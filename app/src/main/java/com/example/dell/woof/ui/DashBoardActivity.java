@@ -1,5 +1,6 @@
 package com.example.dell.woof.ui;
 
+import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,102 +10,53 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.example.dell.woof.R;
-import com.example.dell.woof.model.DoctorsDetails;
+import com.example.dell.woof.WoofApplication;
+import com.example.dell.woof.fragments.DoctorsFragment;
+import com.example.dell.woof.fragments.HomeFragment;
+import com.example.dell.woof.fragments.SpaFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-public class DashBoardActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener{
+public class DashBoardActivity extends BaseActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        LocationListener, NavigationView.OnNavigationItemSelectedListener {
 
     private Bundle bundle;
-    private static String TYPE = "type";
     private LocationManager mLocationManager;
     LocationRequest mLocationRequest;
-    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-    private boolean isProviderEnabled = false, isNetworkEnabled = false, canGetLocation = false;
+    private boolean isProviderEnabled = false;
     private Location mLastLocation;
-    private Gson gson = new Gson();
-    private double latitude, longitude;
     private GoogleApiClient mGoogleApiClient;
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private android.app.FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-
+        initializeAll();
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         try {
             isProviderEnabled = mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         } catch(Exception ex) {}
 
-
-        findViewById(R.id.btnVeterinary).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                getNearByDoctors();
-            }
-        });
-
-        findViewById(R.id.btnSpa).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DashBoardActivity.this, DoctorsActivity.class);
-                bundle = new Bundle();
-                bundle.putString(TYPE, "Spa");
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        findViewById(R.id.btnKennel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DashBoardActivity.this, DoctorsActivity.class);
-                bundle = new Bundle();
-                bundle.putString(TYPE, "Kennel");
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        findViewById(R.id.btnLovenest).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DashBoardActivity.this, DogProfileActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        findViewById(R.id.btnStore).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DashBoardActivity.this, DoctorsActivity.class);
-                bundle = new Bundle();
-                bundle.putString(TYPE, "Store");
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         if(!isProviderEnabled) {
             // notify user
@@ -129,6 +81,25 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
             });
             dialog.show();
         }
+    }
+
+    private void initializeAll(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        toolbar.setTitleTextColor(getResources().getColor(R.color.black));
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvName)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserName());
+        ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvEmail)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserEmail());
     }
 
     @Override
@@ -172,7 +143,15 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
         if (mLastLocation != null)
         Toast.makeText(DashBoardActivity.this, " "+mLastLocation.getLatitude()+" "+mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-
+        fragmentManager = getFragmentManager();
+        bundle = new Bundle();
+        if (mLastLocation != null){
+            bundle.putDouble("latitude", mLastLocation.getLatitude());
+            bundle.putDouble("longitude", mLastLocation.getLongitude());
+        }
+        Fragment fragment = new HomeFragment();
+        fragment.setArguments(bundle);
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
     }
@@ -187,39 +166,72 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
 
     }
 
-    private void getNearByDoctors() {
-        showProgressDialog("Getting doctors nearby you..");
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("type", "doctor");
-        List<Double> list = new ArrayList<>();
-        list.add(mLastLocation.getLatitude());
-        list.add(mLastLocation.getLongitude());
-        params.put("location", list);
 
-        com.android.volley.Response.Listener<ArrayList<DoctorsDetails>> listener = new Response.Listener<ArrayList<DoctorsDetails>>() {
-            @Override
-            public void onResponse(ArrayList<DoctorsDetails> response) {
-                hideProgressDialog();
-                Toast.makeText(DashBoardActivity.this, "Success", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DashBoardActivity.this, DoctorsActivity.class);
-                bundle = new Bundle();
-                bundle.putSerializable("doctors", response);
-                bundle.putString(TYPE, "Veterinary");
-                intent.putExtras(bundle);
-                startActivity(intent);
-                finish();
-            }
-        };
 
-        com.android.volley.Response.ErrorListener errorListener = new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                hideProgressDialog();
-                Toast.makeText(DashBoardActivity.this, "Error "+error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
+        return true;
+    }
 
-        BaseRequestClass.fetchDoctorsDetails(DashBoardActivity.this, params, listener, errorListener);
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        android.app.Fragment fragment = null;
+        Bundle bundle = new Bundle();
+        switch (item.getItemId()){
+            case R.id.home:
+                fragment = new HomeFragment();
+                if (mLastLocation != null){
+                    bundle.putDouble("latitude", mLastLocation.getLatitude());
+                    bundle.putDouble("longitude", mLastLocation.getLongitude());
+                }
+                fragment.setArguments(bundle);
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.profile:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.buddies:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.love:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.chatHistory:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.chatLocation:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.meeting:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.partner:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.doctors:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new DoctorsFragment()).commit();
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.kennel:
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.spa:
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new SpaFragment()).commit();
+                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.home){
+            Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT);
+        }
+        return true;
     }
 
     @Override

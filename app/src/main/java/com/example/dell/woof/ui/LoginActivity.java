@@ -60,7 +60,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     private void facebookSignIn() {
         FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this.getApplicationContext());
+        AppEventsLogger.activateApp(this);
 
         callbackManager = CallbackManager.Factory.create();
 

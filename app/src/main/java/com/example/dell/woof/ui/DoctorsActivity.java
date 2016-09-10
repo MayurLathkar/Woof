@@ -2,13 +2,10 @@ package com.example.dell.woof.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.dell.woof.R;
 import com.example.dell.woof.adapters.DoctorsViewPagerAdapter;
@@ -22,7 +19,7 @@ public class DoctorsActivity extends AppCompatActivity {
     private NonSwipeableViewPager viewPager;
     private SlidingTabLayout tabs;
     private DoctorsViewPagerAdapter adapter;
-    private DrawerLayout drawerLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +34,10 @@ public class DoctorsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         toolbar.setTitleTextColor(getResources().getColor(R.color.black));
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         viewPager = (NonSwipeableViewPager) findViewById(R.id.viewPager);
         tabs = (SlidingTabLayout) findViewById(R.id.tabs);
         tabs.setDistributeEvenly(true);
         tabs.setSelectedIndicatorColors(getResources().getColor(R.color.white));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                drawerLayout.openDrawer(Gravity.LEFT);
-            }
-        });
 
         tabs.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
             @Override
@@ -105,6 +95,7 @@ public class DoctorsActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.dashboard_menu, menu);
         return true;
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

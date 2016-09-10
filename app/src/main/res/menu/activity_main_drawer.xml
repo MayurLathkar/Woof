@@ -1,36 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <!--<item-->
-            <!--android:id="@+id/nav_camera"-->
-            <!--android:icon="@drawable/ic_menu_camera"-->
-            <!--android:title="Import" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_gallery"-->
-            <!--android:icon="@drawable/ic_menu_gallery"-->
-            <!--android:title="Gallery" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_slideshow"-->
-            <!--android:icon="@drawable/ic_menu_slideshow"-->
-            <!--android:title="Slideshow" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_manage"-->
-            <!--android:icon="@drawable/ic_menu_manage"-->
-            <!--android:title="Tools" />-->
+    <group android:checkableBehavior="single" >
+        <item
+            android:id="@+id/home"
+            android:icon="@android:drawable/ic_menu_camera"
+            android:title="Home" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="My Profile" />
+        <item
+            android:id="@+id/buddies"
+            android:icon="@android:drawable/ic_menu_crop"
+            android:title="My Buddies" />
+        <item
+            android:id="@+id/love"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="My Love" />
+
+        <item android:id="@+id/chatHistory"
+            android:icon="@android:drawable/ic_lock_silent_mode"
+            android:title="Chat History"/>
+
+        <item android:id="@+id/chatLocation"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="Chat Location"/>
+
+        <item android:id="@+id/meeting"
+            android:icon="@android:drawable/ic_menu_gallery"
+            android:title="Meeting"/>
+
+        <item android:id="@+id/partner"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:title="Partner With Us"/>
+
+        <item android:id="@+id/doctors"
+            android:title="My Doctors"/>
+
+        <item android:id="@+id/kennel"
+            android:title="My Kennel"/>
+
+        <item android:id="@+id/spa"
+            android:title="My Spa"/>
+
+        <item android:id="@+id/store"
+            android:title="My Store"/>
+
+        <item android:id="@+id/Feedback"
+            android:title="Feedback &amp; Complaints"/>
+
+        <item android:id="@+id/Legal"
+            android:title="Legal &amp; About Us"/>
+
+        <item android:id="@+id/Logout"
+            android:title="Legal &amp; Logout"/>
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <!--<item-->
-                <!--android:id="@+id/nav_share"-->
-                <!--android:icon="@drawable/ic_menu_share"-->
-                <!--android:title="Share" />-->
-            <!--<item-->
-                <!--android:id="@+id/nav_send"-->
-                <!--android:icon="@drawable/ic_menu_send"-->
-                <!--android:title="Send" />-->
-        </menu>
-    </item>
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+            <!--&lt;!&ndash;<item&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/nav_share"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:icon="@drawable/ic_menu_share"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:title="Share" />&ndash;&gt;-->
+            <!--&lt;!&ndash;<item&ndash;&gt;-->
+                <!--&lt;!&ndash;android:id="@+id/nav_send"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:icon="@drawable/ic_menu_send"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:title="Send" />&ndash;&gt;-->
+        <!--</menu>-->
+    <!--</item>-->
 
 </menu>

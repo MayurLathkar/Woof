@@ -118,8 +118,6 @@ public class NearByFragment extends android.support.v4.app.Fragment implements O
         if (type.equals("Veterinary")){
             if ( doctorsDetailses.size() > 0)
                 setNearestDoctorsOnMap();
-            else
-                Toast.makeText(getContext(), "No doctors found near by you...!" , Toast.LENGTH_SHORT).show();
         }
         else if (type.equals("Spa"))
             setNearestSpaOnMap();
@@ -143,6 +141,13 @@ public class NearByFragment extends android.support.v4.app.Fragment implements O
 
         mGoogleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mGoogleApiClient.disconnect();
     }
 
     private void setNearestSpaOnMap(){
