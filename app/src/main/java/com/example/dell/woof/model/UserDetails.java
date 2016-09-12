@@ -9,6 +9,15 @@ import java.io.Serializable;
  */
 public class UserDetails implements Serializable{
 
+    public UserDetails(){}
+
+    public UserDetails(String name, String email, String number, String address){
+        this.userName = name;
+        this.userEmail = email;
+        this.userNumber = number;
+        this.userAddress = address;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -74,4 +83,14 @@ public class UserDetails implements Serializable{
 
     @SerializedName("icon")
     private String userProfileImage;
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    private String userAddress;
 }

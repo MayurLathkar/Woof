@@ -26,6 +26,7 @@ import com.example.dell.woof.R;
 import com.example.dell.woof.WoofApplication;
 import com.example.dell.woof.fragments.DoctorsFragment;
 import com.example.dell.woof.fragments.HomeFragment;
+import com.example.dell.woof.fragments.MyProfileFragment;
 import com.example.dell.woof.fragments.SpaFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -187,39 +188,30 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 }
                 fragment.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.profile:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                fragment = new MyProfileFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.buddies:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.love:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.chatHistory:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.chatLocation:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.meeting:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.partner:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.doctors:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new DoctorsFragment()).commit();
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.kennel:
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.spa:
                 fragmentManager.beginTransaction().replace(R.id.content_frame, new SpaFragment()).commit();
-                Toast.makeText(DashBoardActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
