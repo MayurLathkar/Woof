@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, null);
+
         if (getArguments() != null){
             mLatitude = getArguments().getDouble("latitude");
             mLongitude = getArguments().getDouble("longitude");
@@ -124,6 +125,8 @@ public class HomeFragment extends Fragment {
 
         BaseRequestClass.fetchDoctorsDetails(getActivity(), params, listener, errorListener);
     }
+
+
 
     protected void showProgressDialog(String msg) {
         if (mProgressDialog == null) {

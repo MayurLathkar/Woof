@@ -6,8 +6,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.example.dell.woof.model.DoctorsDetails;
 import com.example.dell.woof.model.DogDetails;
+import com.example.dell.woof.model.MyDoctors;
+import com.example.dell.woof.model.MyKennel;
+import com.example.dell.woof.model.MySpas;
+import com.example.dell.woof.model.MyStore;
 import com.example.dell.woof.model.UserDetails;
 import com.example.dell.woof.requests.FetchDoctorsDetails;
+import com.example.dell.woof.requests.FetchMyDoctors;
+import com.example.dell.woof.requests.FetchMyKennel;
+import com.example.dell.woof.requests.FetchMySpas;
+import com.example.dell.woof.requests.FetchMyStore;
 import com.example.dell.woof.requests.SaveDogDetailsRequest;
 import com.example.dell.woof.requests.UserLoginRequest;
 import com.example.dell.woof.requests.UserSignUpRequest;
@@ -62,6 +70,47 @@ public class BaseRequestClass {
         Type type = new TypeToken<ArrayList<DoctorsDetails>>() {
         }.getType();
         final FetchDoctorsDetails<ArrayList<DoctorsDetails>> lRequest = new FetchDoctorsDetails<>(con, params,type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static FetchMySpas<ArrayList<MySpas>> fetchMySpas(Context con, HashMap<String, String> params,
+                                                                     Response
+                                                                                             .Listener<ArrayList<MySpas>> listener, Response.ErrorListener errorListener) {
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<ArrayList<MySpas>>() {
+        }.getType();
+        final FetchMySpas<ArrayList<MySpas>> lRequest = new FetchMySpas<>(con, params,type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static FetchMyDoctors<ArrayList<MyDoctors>> fetchMyDoctors(Context con, HashMap<String, String> params, Response
+            .Listener<ArrayList<MyDoctors>> listener, Response.ErrorListener errorListener){
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<ArrayList<MyDoctors>>() {
+        }.getType();
+        final FetchMyDoctors<ArrayList<MyDoctors>> lRequest = new FetchMyDoctors<>(con, params,type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static FetchMyKennel<ArrayList<MyKennel>> fetchMyKennel(Context con, HashMap<String, String> params, Response
+            .Listener<ArrayList<MyKennel>> listener, Response.ErrorListener errorListener){
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<ArrayList<MyKennel>>() {
+        }.getType();
+        final FetchMyKennel<ArrayList<MyKennel>> lRequest = new FetchMyKennel<>(con, params,type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static FetchMyStore<ArrayList<MyStore>> fetchMyStore(Context con, HashMap<String, String> params, Response
+            .Listener<ArrayList<MyStore>> listener, Response.ErrorListener errorListener){
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<ArrayList<MyStore>>() {
+        }.getType();
+        final FetchMyStore<ArrayList<MyStore>> lRequest = new FetchMyStore<>(con, params,type, listener, errorListener);
         queue.add(lRequest);
         return lRequest;
     }

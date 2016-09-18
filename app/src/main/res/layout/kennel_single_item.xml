@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="5dp"
-    android:background="@android:color/white"
-    android:orientation="vertical"
+    android:layout_margin="4dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.CardView
@@ -17,60 +15,63 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/doctorImage"
-                android:layout_marginRight="5dp"
-                android:layout_width="60dp"
-                android:layout_height="50dp"
-                android:src="@drawable/doctor"
+                android:id="@+id/kennelImage"
+                android:layout_marginRight="10dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/dog1"
                 android:layout_alignBottom="@+id/linearLayout3"
                 android:layout_alignParentTop="true" />
             <LinearLayout
-                android:layout_toRightOf="@+id/doctorImage"
+                android:layout_toRightOf="@+id/kennelImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
                 android:orientation="vertical"
                 android:id="@+id/linearLayout3">
                 <TextView
-                    android:id="@+id/doctorName"
+                    android:id="@+id/kennelName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="Harrison Wells"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
                     android:textColor="@android:color/black"/>
                 <TextView
-                    android:id="@+id/doctorEmail"
+                    android:id="@+id/kennelEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="harison@gmail.com"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="#808080"/>
                 <TextView
-                    android:id="@+id/doctorNumber"
+                    android:id="@+id/kennelNumber"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:text="9845738473"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="#808080"/>
                 <TextView
-                    android:id="@+id/doctorBook"
+                    android:id="@+id/kennelCost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contacted at 12 Sep, 2016"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="#808080"/>
                 <TextView
-                    android:id="@+id/doctorAddress"
+                    android:id="@+id/kennelAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Kalyan nagar, Bangalore"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="#808080"/>
                 <TextView
-                    android:id="@+id/doctorWebsite"
+                    android:id="@+id/kennelWebsite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="http://bangaloredoctors.com"
                     android:autoLink="web"
-                    android:textColor="@android:color/black"/>
+                    android:textColor="#808080"/>
             </LinearLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>

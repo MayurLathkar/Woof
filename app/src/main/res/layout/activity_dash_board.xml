@@ -40,7 +40,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:theme="@style/Theme.Design.Light"
+        app:theme="@style/AppTheme"
         app:itemTextColor="@color/black"
         app:headerLayout="@layout/nav_header_main"
         app:itemBackground="@android:drawable/menuitem_background"

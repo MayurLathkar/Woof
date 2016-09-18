@@ -16,8 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.example.dell.woof.R;
 import com.example.dell.woof.WoofApplication;
-import com.example.dell.woof.adapters.MySpaListAdapter;
-import com.example.dell.woof.model.MySpas;
+import com.example.dell.woof.adapters.MyStoreListAdapter;
+import com.example.dell.woof.model.MyStore;
 import com.example.dell.woof.ui.BaseRequestClass;
 import com.example.dell.woof.util.Util;
 import com.squareup.picasso.Picasso;
@@ -27,53 +27,52 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Dell on 09-09-2016.
+ * Created by Dell on 17-09-2016.
  */
-public class SpaFragment extends Fragment {
+public class StoreFragment extends Fragment {
 
-    private List<MySpas> spasList = new ArrayList<>();
-    private MySpaListAdapter adapter;
-    private MySpaListAdapter.OnSpaClickListener clickListener;
+    private List<MyStore> storeList = new ArrayList<>();
+    private MyStoreListAdapter adapter;
+    private MyStoreListAdapter.OnStoreClickListener clickListener;
     private BottomSheetBehavior mBottomSheetBehavior;
     private ListView listView;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_spa, null);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_store, null);
         listView = (ListView) view.findViewById(R.id.listview);
         final View bottomSheet = view.findViewById(R.id.bottom_sheet);
-        getAllSpasNearBy();
+        getMyStore();
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        adapter = new MySpaListAdapter(getActivity(), spasList);
-        clickListener = new MySpaListAdapter.OnSpaClickListener() {
+        adapter = new MyStoreListAdapter(getActivity(), storeList);
+        clickListener = new MyStoreListAdapter.OnStoreClickListener() {
             @Override
-            public void onSpaClick(View view, int position) {
+            public void onStoreClick(View view, int position) {
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                ImageView imageView = (ImageView) bottomSheet.findViewById(R.id.spaImage);
-                ((TextView) bottomSheet.findViewById(R.id.spaName)).setText(spasList.get(position).getSpa().getName());
-                ((TextView) bottomSheet.findViewById(R.id.spaAbout)).setText(spasList.get(position).getSpa().getAbout());
-                Picasso.with(getActivity()).load(spasList.get(position).getSpa().getImage()).into(imageView);
+                ImageView imageView = (ImageView) bottomSheet.findViewById(R.id.storeImage);
+                ((TextView) bottomSheet.findViewById(R.id.storeName)).setText(storeList.get(position).getStore().getName());
+                ((TextView) bottomSheet.findViewById(R.id.storeAbout)).setText(storeList.get(position).getStore().getAbout());
+                Picasso.with(getActivity()).load(storeList.get(position).getStore().getImage()).into(imageView);
             }
         };
         listView.setAdapter(adapter);
         return view;
     }
 
-    private void getAllSpasNearBy(){
-        Util.showProgressDialog("Loading your spas...", getActivity());
+    private void getMyStore(){
+        Util.showProgressDialog("Loading your store...", getActivity());
         HashMap<String, String> params = new HashMap<>();
         params.put("user", WoofApplication.getWoofApplication().getCurrentUser().getUserID());
-        params.put("type","spa");
-        com.android.volley.Response.Listener<ArrayList<MySpas>> listener = new Response.Listener<ArrayList<MySpas>>() {
+        params.put("type","store");
+        final com.android.volley.Response.Listener<ArrayList<MyStore>> listener = new Response.Listener<ArrayList<MyStore>>() {
             @Override
-            public void onResponse(ArrayList<MySpas> response) {
+            public void onResponse(ArrayList<MyStore> response) {
                 Util.hideProgressDialog();
-                spasList = response;
-                adapter = new MySpaListAdapter(getActivity(), spasList);
+                storeList = response;
+                adapter = new MyStoreListAdapter(getActivity(), storeList);
                 adapter.setListener(clickListener);
                 listView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Success Spa", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -85,6 +84,6 @@ public class SpaFragment extends Fragment {
             }
         };
 
-        BaseRequestClass.fetchMySpas(getActivity(), params, listener, errorListener);
+        BaseRequestClass.fetchMyStore(getActivity(), params, listener, errorListener);
     }
 }

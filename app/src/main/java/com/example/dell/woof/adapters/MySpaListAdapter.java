@@ -4,8 +4,16 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
 import com.example.dell.woof.R;
+import com.example.dell.woof.model.MySpas;
+import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Dell on 09-09-2016.
@@ -13,9 +21,16 @@ import com.example.dell.woof.R;
 public class MySpaListAdapter extends BaseAdapter {
 
     Context context;
+    List<MySpas> spasList = new ArrayList<>();
+    OnSpaClickListener listener;
 
-    public MySpaListAdapter(Context context){
+    public void setListener(OnSpaClickListener listener) {
+        this.listener = listener;
+    }
+
+    public MySpaListAdapter(Context context, List<MySpas> list){
         this.context = context;
+        this.spasList = list;
     }
 
     @Override
@@ -35,12 +50,29 @@ public class MySpaListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 8;
+        return spasList.size();
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         view = View.inflate(context, R.layout.spa_single_item, null);
+        ((TextView) view.findViewById(R.id.spaName)).setText(spasList.get(i).getSpa().getName());
+        ((TextView) view.findViewById(R.id.spaNumber)).setText(spasList.get(i).getSpa().getNumber());
+        ((TextView) view.findViewById(R.id.spaEmail)).setText(spasList.get(i).getSpa().getEmail());
+        ((TextView) view.findViewById(R.id.spaAddress)).setText(spasList.get(i).getSpa().getAddress());
+        ((TextView) view.findViewById(R.id.spaTime)).setText("Time: "+spasList.get(i).getSpa().getTiming());
+        CircleImageView imageView = (CircleImageView) view.findViewById(R.id.spaImage);
+        Picasso.with(context).load(spasList.get(i).getSpa().getImage()).into(imageView);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onSpaClick(view, i);
+            }
+        });
         return view;
+    }
+
+    public interface OnSpaClickListener{
+        void onSpaClick(View view, int position);
     }
 }

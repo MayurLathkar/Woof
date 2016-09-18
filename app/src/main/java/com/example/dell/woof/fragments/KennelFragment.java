@@ -1,6 +1,5 @@
 package com.example.dell.woof.fragments;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -14,10 +13,10 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.example.dell.woof.MyKennelListAdapter;
 import com.example.dell.woof.R;
 import com.example.dell.woof.WoofApplication;
-import com.example.dell.woof.adapters.MySpaListAdapter;
-import com.example.dell.woof.model.MySpas;
+import com.example.dell.woof.model.MyKennel;
 import com.example.dell.woof.ui.BaseRequestClass;
 import com.example.dell.woof.util.Util;
 import com.squareup.picasso.Picasso;
@@ -27,53 +26,52 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Dell on 09-09-2016.
+ * Created by Dell on 17-09-2016.
  */
-public class SpaFragment extends Fragment {
+public class KennelFragment extends android.app.Fragment {
 
-    private List<MySpas> spasList = new ArrayList<>();
-    private MySpaListAdapter adapter;
-    private MySpaListAdapter.OnSpaClickListener clickListener;
-    private BottomSheetBehavior mBottomSheetBehavior;
     private ListView listView;
+    private MyKennelListAdapter adapter;
+    private List<MyKennel> kennelList = new ArrayList<>();
+    private BottomSheetBehavior mBottomSheetBehavior;
+    private MyKennelListAdapter.OnKennelClickListener onKennelClickListener;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_spa, null);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_kennel, null);
         listView = (ListView) view.findViewById(R.id.listview);
         final View bottomSheet = view.findViewById(R.id.bottom_sheet);
-        getAllSpasNearBy();
+        adapter = new MyKennelListAdapter(getActivity(), kennelList);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        adapter = new MySpaListAdapter(getActivity(), spasList);
-        clickListener = new MySpaListAdapter.OnSpaClickListener() {
+        onKennelClickListener = new MyKennelListAdapter.OnKennelClickListener() {
             @Override
             public void onSpaClick(View view, int position) {
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 ImageView imageView = (ImageView) bottomSheet.findViewById(R.id.spaImage);
-                ((TextView) bottomSheet.findViewById(R.id.spaName)).setText(spasList.get(position).getSpa().getName());
-                ((TextView) bottomSheet.findViewById(R.id.spaAbout)).setText(spasList.get(position).getSpa().getAbout());
-                Picasso.with(getActivity()).load(spasList.get(position).getSpa().getImage()).into(imageView);
+                ((TextView) bottomSheet.findViewById(R.id.spaName)).setText(kennelList.get(position).getKennel().getName());
+                ((TextView) bottomSheet.findViewById(R.id.spaAbout)).setText(kennelList.get(position).getKennel().getAddress());
+                Picasso.with(getActivity()).load(kennelList.get(position).getKennel().getImage()).into(imageView);
             }
         };
-        listView.setAdapter(adapter);
+        getMyKennel();
         return view;
     }
 
-    private void getAllSpasNearBy(){
-        Util.showProgressDialog("Loading your spas...", getActivity());
+    private void getMyKennel(){
+        Util.showProgressDialog("Loading your kennels...", getActivity());
         HashMap<String, String> params = new HashMap<>();
         params.put("user", WoofApplication.getWoofApplication().getCurrentUser().getUserID());
-        params.put("type","spa");
-        com.android.volley.Response.Listener<ArrayList<MySpas>> listener = new Response.Listener<ArrayList<MySpas>>() {
+        params.put("type","kennel");
+        final com.android.volley.Response.Listener<ArrayList<MyKennel>> listener = new Response.Listener<ArrayList<MyKennel>>() {
             @Override
-            public void onResponse(ArrayList<MySpas> response) {
+            public void onResponse(ArrayList<MyKennel> response) {
                 Util.hideProgressDialog();
-                spasList = response;
-                adapter = new MySpaListAdapter(getActivity(), spasList);
-                adapter.setListener(clickListener);
+                kennelList = response;
+                adapter = new MyKennelListAdapter(getActivity(), kennelList);
+                adapter.setListener(onKennelClickListener);
                 listView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Success Spa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Success Kennel", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -85,6 +83,6 @@ public class SpaFragment extends Fragment {
             }
         };
 
-        BaseRequestClass.fetchMySpas(getActivity(), params, listener, errorListener);
+        BaseRequestClass.fetchMyKennel(getActivity(), params, listener, errorListener);
     }
 }

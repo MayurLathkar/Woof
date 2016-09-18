@@ -16,7 +16,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -26,8 +25,10 @@ import com.example.dell.woof.R;
 import com.example.dell.woof.WoofApplication;
 import com.example.dell.woof.fragments.DoctorsFragment;
 import com.example.dell.woof.fragments.HomeFragment;
+import com.example.dell.woof.fragments.KennelFragment;
 import com.example.dell.woof.fragments.MyProfileFragment;
 import com.example.dell.woof.fragments.SpaFragment;
+import com.example.dell.woof.fragments.StoreFragment;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -101,7 +102,15 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         navigationView.setNavigationItemSelectedListener(this);
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvName)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserName());
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvEmail)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserEmail());
+       // setUpCounter();
     }
+
+//    private void setUpCounter(){
+//        View view = View.inflate(DashBoardActivity.this, R.layout.menu_counter, null);
+//        ((TextView) view.findViewById(R.id.counter)).setText("7");
+//        navigationView.getMenu().getItem(R.id.doctors).setActionView(view);
+//    }
+
 
     @Override
     protected void onStart() {
@@ -170,12 +179,6 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main_drawer, menu);
-        return true;
-    }
-
-    @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         android.app.Fragment fragment = null;
         Bundle bundle = new Bundle();
@@ -193,6 +196,22 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 fragment = new MyProfileFragment();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
+            case R.id.doctors:
+                fragment = new DoctorsFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                break;
+            case R.id.kennel:
+                fragment = new KennelFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                break;
+            case R.id.spa:
+                fragment = new SpaFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                break;
+            case R.id.store:
+                fragment = new StoreFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                break;
             case R.id.buddies:
                 break;
             case R.id.love:
@@ -205,13 +224,11 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 break;
             case R.id.partner:
                 break;
-            case R.id.doctors:
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new DoctorsFragment()).commit();
-                break;
-            case R.id.kennel:
-                break;
-            case R.id.spa:
-                fragmentManager.beginTransaction().replace(R.id.content_frame, new SpaFragment()).commit();
+            case R.id.Logout:
+                WoofApplication.getWoofApplication().logout();
+                Intent intent = new Intent(DashBoardActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);

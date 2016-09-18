@@ -89,12 +89,14 @@
     </LinearLayout>
     <Button
         android:id="@+id/btnSave"
+        android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
         android:layout_marginBottom="10dp"
         android:textColor="@android:color/white"
         android:background="@color/colorPrimary"
+        android:alpha="0.6"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/profile"
         android:layout_alignEnd="@+id/profile" />

@@ -1,5 +1,6 @@
 package com.example.dell.woof.util;
 
+import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -25,7 +26,7 @@ import java.util.List;
  */
 public class Util {
 
-
+    public static ProgressDialog mProgressDialog = null;
 
     public String getStorageLocation(Context context) {
         String dir = null;
@@ -172,6 +173,20 @@ public class Util {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    public static void showProgressDialog(String msg, Context context) {
+        if (mProgressDialog == null) {
+            mProgressDialog = ProgressDialog.show(context, null, msg, true, false, null);
+        } else {
+            mProgressDialog.setMessage(msg);
+            mProgressDialog.show();
+        }
+    }
+
+    public static void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing())
+            mProgressDialog.dismiss();
     }
 
 }

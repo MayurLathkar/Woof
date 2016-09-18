@@ -50,6 +50,8 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.ivEdit){
+            btnSave.setAlpha(1f);
+            btnSave.setEnabled(true);
             name.setEnabled(true);
             number.setEnabled(true);
             email.setEnabled(true);
@@ -57,7 +59,7 @@ public class MyProfileFragment extends Fragment implements View.OnClickListener{
             name.requestFocus();
         } else if (view.getId() == R.id.btnSave){
             Toast.makeText(getActivity(), "Your details saved", Toast.LENGTH_SHORT).show();
-            WoofApplication.getWoofApplication().initializeUser(new UserDetails(name.getEditableText().toString(), email.getEditableText().toString(), number.getEditableText().toString(), address.getEditableText().toString()));
+            WoofApplication.getWoofApplication().initializeUser(new UserDetails(WoofApplication.getWoofApplication().getCurrentUser().getUserID(), name.getEditableText().toString(), email.getEditableText().toString(), number.getEditableText().toString(), address.getEditableText().toString()));
         }
     }
 }

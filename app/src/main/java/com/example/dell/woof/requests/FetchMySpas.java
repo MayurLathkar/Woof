@@ -15,31 +15,35 @@ import com.example.dell.woof.constants.AppSpecificConstants;
 import com.example.dell.woof.model.MySpas;
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.lang.reflect.Type;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Dell on 19-08-2016.
+ * Created by Dell on 15-09-2016.
  */
-public class FetchSpaDetails<T> extends Request<T> {
+public class FetchMySpas<T> extends Request<T> {
 
     private Request.Priority priority = Request.Priority.NORMAL;
     private Type type;
     private Response.Listener<T> listener;
     private final Gson mGson;
     private Context context;
-    //  private HashMap<String, String> params;
+    private HashMap<String, String> params;
 
-    public FetchSpaDetails(Context context, Type type, Response
+    public FetchMySpas(Context context, HashMap<String, String> params, Type type, Response
             .Listener<T>
             listener, Response.ErrorListener errorListener){
         super(Method.POST, AppSpecificConstants.getBaseApi() + AppSpecificConstants
-                        .API_fetchDoctors,
+                        .API_fetchMySpa,
                 errorListener);
         this.context = context;
         this.type = type;
-        //     this.params = params;
+        this.params = params;
         this.mGson = new Gson();
         this.listener = listener;
         VolleyLog.DEBUG = true;
@@ -53,18 +57,18 @@ public class FetchSpaDetails<T> extends Request<T> {
         return headers;
     }
 
-//    protected Map<String, String> getParams() throws AuthFailureError {
-//        return params;
-//    }
+    protected Map<String, String> getParams() throws AuthFailureError {
+        return params;
+    }
 
-//    public byte[] getBody() throws AuthFailureError {
-//        Map<String, String> params = getParams();
-//        if (params != null && params.size() > 0) {
-//            JSONObject obj = new JSONObject(params);
-//            return obj.toString().getBytes(Charset.forName("UTF-8"));
-//        }
-//        return null;
-//    }
+    public byte[] getBody() throws AuthFailureError {
+        Map<String, String> params = getParams();
+        if (params != null && params.size() > 0) {
+            JSONObject obj = new JSONObject(params);
+            return obj.toString().getBytes(Charset.forName("UTF-8"));
+        }
+        return null;
+    }
 
     @Override
     public Request.Priority getPriority() {
@@ -91,7 +95,7 @@ public class FetchSpaDetails<T> extends Request<T> {
 
     @Override
     protected void deliverResponse(T response) {
-        MySpas result = (MySpas) response;
+        ArrayList<MySpas> result = (ArrayList<MySpas>) response;
         if (listener != null)
             listener.onResponse((T) result);
     }

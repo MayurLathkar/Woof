@@ -11,7 +11,8 @@ public class UserDetails implements Serializable{
 
     public UserDetails(){}
 
-    public UserDetails(String name, String email, String number, String address){
+    public UserDetails(String userID, String name, String email, String number, String address){
+        this.userID = userID;
         this.userName = name;
         this.userEmail = email;
         this.userNumber = number;

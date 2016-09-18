@@ -1,62 +1,88 @@
 package com.example.dell.woof.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 /**
  * Created by Dell on 12-09-2016.
  */
-public class MyDoctors {
+public class MyDoctors implements Serializable{
 
-    private String name;
-    private String email;
-    private String number;
-    private String address;
-    private String contacted;
+    @SerializedName("user")
+    private String userId;
 
-    public MyDoctors(String name, String email, String number, String address, String contacted){
-        this.name = name;
-        this.email = email;
-        this.number = number;
-        this.address = address;
-        this.contacted = contacted;
+    @SerializedName("doctor")
+    private Doctor doctor;
+
+    @SerializedName("timings")
+    private String timings;
+
+    @SerializedName("status")
+    private boolean status;
+
+    @SerializedName("type")
+    private String type;
+
+    @SerializedName("bookingtype")
+    private String bookingType;
+
+    @SerializedName("id")
+    private String id;
+
+    public String getId() {
+        return id;
     }
 
-    public String getContacted() {
-        return contacted;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setContacted(String contacted) {
-        this.contacted = contacted;
+    public boolean isStatus() {
+        return status;
     }
 
-    public String getAddress() {
-        return address;
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getType() {
+        return type;
     }
 
-    public String getNumber() {
-        return number;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public String getBookingType() {
+        return bookingType;
     }
 
-    public String getEmail() {
-        return email;
+    public void setBookingType(String bookingType) {
+        this.bookingType = bookingType;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getTimings() {
+        return timings;
     }
 
-    public String getName() {
-        return name;
+    public void setTimings(String timings) {
+        this.timings = timings;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Doctor getDoctor() {
+        return doctor;
     }
 
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }

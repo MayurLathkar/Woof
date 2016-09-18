@@ -4,12 +4,28 @@
     <group android:checkableBehavior="single" >
         <item
             android:id="@+id/home"
-            android:icon="@android:drawable/ic_menu_camera"
+            android:icon="@drawable/home"
             android:title="Home" />
         <item
             android:id="@+id/profile"
-            android:icon="@android:drawable/ic_menu_agenda"
+            android:icon="@drawable/accnt"
             android:title="My Profile" />
+
+        <item android:id="@+id/doctors"
+            android:icon="@android:drawable/ic_menu_delete"
+            android:title="My Doctors" />
+
+        <item android:id="@+id/kennel"
+            android:icon="@android:drawable/ic_btn_speak_now"
+            android:title="My Kennel"/>
+
+        <item android:id="@+id/spa"
+            android:icon="@drawable/accnt"
+            android:title="My Spa"/>
+
+        <item android:id="@+id/store"
+            android:icon="@drawable/home"
+            android:title="My Store"/>
         <item
             android:id="@+id/buddies"
             android:icon="@android:drawable/ic_menu_crop"
@@ -35,39 +51,16 @@
             android:icon="@android:drawable/ic_menu_delete"
             android:title="Partner With Us"/>
 
-        <item android:id="@+id/doctors"
-            android:title="My Doctors"/>
-
-        <item android:id="@+id/kennel"
-            android:title="My Kennel"/>
-
-        <item android:id="@+id/spa"
-            android:title="My Spa"/>
-
-        <item android:id="@+id/store"
-            android:title="My Store"/>
-
         <item android:id="@+id/Feedback"
+            android:icon="@drawable/accnt"
             android:title="Feedback &amp; Complaints"/>
 
         <item android:id="@+id/Legal"
+            android:icon="@android:drawable/ic_menu_delete"
             android:title="Legal &amp; About Us"/>
 
         <item android:id="@+id/Logout"
-            android:title="Legal &amp; Logout"/>
+            android:icon="@android:drawable/ic_lock_silent_mode"
+            android:title="Logout"/>
     </group>
-
-    <!--<item android:title="Communicate">-->
-        <!--<menu>-->
-            <!--&lt;!&ndash;<item&ndash;&gt;-->
-                <!--&lt;!&ndash;android:id="@+id/nav_share"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:icon="@drawable/ic_menu_share"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:title="Share" />&ndash;&gt;-->
-            <!--&lt;!&ndash;<item&ndash;&gt;-->
-                <!--&lt;!&ndash;android:id="@+id/nav_send"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:icon="@drawable/ic_menu_send"&ndash;&gt;-->
-                <!--&lt;!&ndash;android:title="Send" />&ndash;&gt;-->
-        <!--</menu>-->
-    <!--</item>-->
-
 </menu>
