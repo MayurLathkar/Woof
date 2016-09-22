@@ -1,8 +1,6 @@
 package com.example.dell.woof.adapters;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.dell.woof.R;
-import com.example.dell.woof.util.Util;
+import com.squareup.picasso.Picasso;
 
-import java.util.List;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Dell on 28-08-2016.
@@ -20,19 +18,16 @@ import java.util.List;
 public class DogProfileAdapter extends RecyclerView.Adapter<DogProfileAdapter.ViewHolder> {
 
     private Context context;
-    private List<Bitmap> dogsImageList;
+    private String[] dogsImageList;
 
-    public DogProfileAdapter(Context context, List<Bitmap> dogImages){
+    public DogProfileAdapter(Context context, String[] dogImages){
         this.context = context;
         this.dogsImageList = dogImages;
     }
 
     @Override
     public int getItemCount() {
-        if (dogsImageList.size() > 0){
-            return dogsImageList.size() + 1;
-        }
-        return 1;
+        return dogsImageList.length;
     }
 
     @Override
@@ -44,28 +39,13 @@ public class DogProfileAdapter extends RecyclerView.Adapter<DogProfileAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if (position < dogsImageList.size()){
-            if(dogsImageList.get(position) != null)
-                holder.dogProfile.setImageBitmap(dogsImageList.get(position));
-        }
-
-        holder.dogProfile.setOnClickListener(new View.OnClickListener() {
+        Picasso.with(context).load(dogsImageList[position]).into(holder.dogProfile);
+        holder.deleteDog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((Activity) context).startActivityForResult(Util.getPickImageChooserIntent(context), position);
+                Toast.makeText(context, "Delete "+position, Toast.LENGTH_SHORT).show();
             }
         });
-
-        if (position >= 0){
-            holder.deleteDog.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(context, "Position: "+position+" SIze: "+dogsImageList.size(), Toast.LENGTH_SHORT).show();
-                    dogsImageList.remove(position);
-                    notifyDataSetChanged();
-                }
-            });
-        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder{
@@ -74,8 +54,8 @@ public class DogProfileAdapter extends RecyclerView.Adapter<DogProfileAdapter.Vi
 
         public ViewHolder(View itemView){
             super(itemView);
-            dogProfile = (ImageView) itemView.findViewById(R.id.addDog);
-            deleteDog = (ImageView) itemView.findViewById(R.id.deleteDog);
+            dogProfile = (CircleImageView) itemView.findViewById(R.id.profile);
+            deleteDog = (ImageView) itemView.findViewById(R.id.delete);
         }
     }
 

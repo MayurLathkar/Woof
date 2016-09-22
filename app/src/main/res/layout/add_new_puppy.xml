@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#ececec"
+        android:layout_margin="5dp"
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/addIcon"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"/>
+        <TextView
+            android:layout_below="@+id/addIcon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textSize="18sp"
+            android:textColor="#b9b9b9"
+            android:text="Add Your Puppies Details"/>
+    </RelativeLayout>
+</LinearLayout>

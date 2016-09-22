@@ -8,10 +8,12 @@ import com.example.dell.woof.model.DoctorsDetails;
 import com.example.dell.woof.model.DogDetails;
 import com.example.dell.woof.model.MyDoctors;
 import com.example.dell.woof.model.MyKennel;
+import com.example.dell.woof.model.MyPet;
 import com.example.dell.woof.model.MySpas;
 import com.example.dell.woof.model.MyStore;
 import com.example.dell.woof.model.UserDetails;
 import com.example.dell.woof.requests.FetchDoctorsDetails;
+import com.example.dell.woof.requests.FetchMyBuddies;
 import com.example.dell.woof.requests.FetchMyDoctors;
 import com.example.dell.woof.requests.FetchMyKennel;
 import com.example.dell.woof.requests.FetchMySpas;
@@ -111,6 +113,16 @@ public class BaseRequestClass {
         Type type = new TypeToken<ArrayList<MyStore>>() {
         }.getType();
         final FetchMyStore<ArrayList<MyStore>> lRequest = new FetchMyStore<>(con, params,type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static FetchMyBuddies<ArrayList<MyPet>> fetchMyBuddies(Context con, String userId, Response
+            .Listener<ArrayList<MyPet>> listener, Response.ErrorListener errorListener){
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<ArrayList<MyPet>>() {
+        }.getType();
+        final FetchMyBuddies<ArrayList<MyPet>> lRequest = new FetchMyBuddies<>(con, userId,type, listener, errorListener);
         queue.add(lRequest);
         return lRequest;
     }

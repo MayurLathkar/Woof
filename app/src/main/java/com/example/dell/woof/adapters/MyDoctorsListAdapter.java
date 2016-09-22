@@ -57,9 +57,8 @@ public class MyDoctorsListAdapter extends BaseAdapter {
     public View getView(final int i, View view, ViewGroup viewGroup) {
         view = View.inflate(context, R.layout.doctor_single_item, null);
         ((TextView) view.findViewById(R.id.doctorName)).setText(myDoctorsList.get(i).getDoctor().getName());
-        ((TextView) view.findViewById(R.id.doctorEmail)).setText(myDoctorsList.get(i).getDoctor().getEmail());
-        ((TextView) view.findViewById(R.id.doctorNumber)).setText(myDoctorsList.get(i).getDoctor().getNumber());
-        ((TextView) view.findViewById(R.id.doctorBook)).setText(myDoctorsList.get(i).getDoctor().getAvailability());
+        ((TextView) view.findViewById(R.id.doctorNumber)).setText("Contact: +91"+myDoctorsList.get(i).getDoctor().getNumber());
+        ((TextView) view.findViewById(R.id.doctorTime)).setText("Time: "+myDoctorsList.get(i).getDoctor().getAvailability()+" (Mon-Sat)");
         ((TextView) view.findViewById(R.id.doctorAddress)).setText(myDoctorsList.get(i).getDoctor().getAddress());
         CircleImageView imageView = (CircleImageView) view.findViewById(R.id.doctorImage);
         Picasso.with(context).load(myDoctorsList.get(i).getDoctor().getImage()).into(imageView);

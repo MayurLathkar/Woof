@@ -1,4 +1,4 @@
-package com.example.dell.woof;
+package com.example.dell.woof.adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.example.dell.woof.R;
 import com.example.dell.woof.model.MyKennel;
 import com.squareup.picasso.Picasso;
 

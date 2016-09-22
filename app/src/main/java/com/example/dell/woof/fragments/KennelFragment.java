@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.example.dell.woof.MyKennelListAdapter;
+import com.example.dell.woof.adapters.MyKennelListAdapter;
 import com.example.dell.woof.R;
 import com.example.dell.woof.WoofApplication;
 import com.example.dell.woof.model.MyKennel;

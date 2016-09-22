@@ -43,19 +43,19 @@
             android:icon="@android:drawable/ic_menu_add"
             android:title="Chat Location"/>
 
-        <item android:id="@+id/meeting"
+        <item android:id="@+id/addDog"
             android:icon="@android:drawable/ic_menu_gallery"
-            android:title="Meeting"/>
+            android:title="Add Dog"/>
 
         <item android:id="@+id/partner"
             android:icon="@android:drawable/ic_menu_delete"
             android:title="Partner With Us"/>
 
-        <item android:id="@+id/Feedback"
+        <item android:id="@+id/feedback"
             android:icon="@drawable/accnt"
             android:title="Feedback &amp; Complaints"/>
 
-        <item android:id="@+id/Legal"
+        <item android:id="@+id/legal"
             android:icon="@android:drawable/ic_menu_delete"
             android:title="Legal &amp; About Us"/>
 

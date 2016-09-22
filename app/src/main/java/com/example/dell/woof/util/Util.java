@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -27,6 +28,15 @@ import java.util.List;
 public class Util {
 
     public static ProgressDialog mProgressDialog = null;
+
+    public static boolean checkLocationServices(Context context) {
+        final LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+           // showInfoDialogDoubleButton(context, "GPS Location Services", "Your GPS seems to be disabled, do you want to enable it?", "Yes", "No");
+            return false;
+        }
+        return true;
+    }
 
     public String getStorageLocation(Context context) {
         String dir = null;

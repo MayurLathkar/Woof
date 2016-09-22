@@ -24,8 +24,11 @@ import android.widget.Toast;
 import com.example.dell.woof.R;
 import com.example.dell.woof.WoofApplication;
 import com.example.dell.woof.fragments.DoctorsFragment;
+import com.example.dell.woof.fragments.FeedBackFragment;
 import com.example.dell.woof.fragments.HomeFragment;
 import com.example.dell.woof.fragments.KennelFragment;
+import com.example.dell.woof.fragments.LegalFragment;
+import com.example.dell.woof.fragments.MyBuddyFragment;
 import com.example.dell.woof.fragments.MyProfileFragment;
 import com.example.dell.woof.fragments.SpaFragment;
 import com.example.dell.woof.fragments.StoreFragment;
@@ -102,14 +105,7 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         navigationView.setNavigationItemSelectedListener(this);
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvName)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserName());
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvEmail)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserEmail());
-       // setUpCounter();
     }
-
-//    private void setUpCounter(){
-//        View view = View.inflate(DashBoardActivity.this, R.layout.menu_counter, null);
-//        ((TextView) view.findViewById(R.id.counter)).setText("7");
-//        navigationView.getMenu().getItem(R.id.doctors).setActionView(view);
-//    }
 
 
     @Override
@@ -184,6 +180,7 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         Bundle bundle = new Bundle();
         switch (item.getItemId()){
             case R.id.home:
+                toolbar.setTitle("Home");
                 fragment = new HomeFragment();
                 if (mLastLocation != null){
                     bundle.putDouble("latitude", mLastLocation.getLatitude());
@@ -193,36 +190,62 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.profile:
+                toolbar.setTitle("My Profile");
                 fragment = new MyProfileFragment();
+                if (mLastLocation != null){
+                    bundle.putDouble("latitude", mLastLocation.getLatitude());
+                    bundle.putDouble("longitude", mLastLocation.getLongitude());
+                }
+                fragment.setArguments(bundle);
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.doctors:
+                toolbar.setTitle("My Doctors");
                 fragment = new DoctorsFragment();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.kennel:
+                toolbar.setTitle("My Kennel");
                 fragment = new KennelFragment();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.spa:
+                toolbar.setTitle("My Spa");
                 fragment = new SpaFragment();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.store:
+                toolbar.setTitle("My Store");
                 fragment = new StoreFragment();
                 fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.buddies:
+                toolbar.setTitle("My Buddies");
+                fragment = new MyBuddyFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.love:
+                toolbar.setTitle("My Love");
                 break;
             case R.id.chatHistory:
+                toolbar.setTitle("My Chat");
                 break;
             case R.id.chatLocation:
                 break;
-            case R.id.meeting:
+            case R.id.addDog:
+                toolbar.setTitle("Add Dog");
                 break;
             case R.id.partner:
+                break;
+            case R.id.feedback:
+                toolbar.setTitle("Feedback");
+                fragment = new FeedBackFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                break;
+            case R.id.legal:
+                toolbar.setTitle("Legal & About Us");
+                fragment = new LegalFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.Logout:
                 WoofApplication.getWoofApplication().logout();

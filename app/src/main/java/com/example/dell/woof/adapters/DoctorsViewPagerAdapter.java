@@ -8,9 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- * Created by Shaifali on 21-03-2016.
- */
+
 public class DoctorsViewPagerAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();

@@ -19,6 +19,7 @@ public class AppSpecificConstants {
     public static String API_fetchDoctors = "user/nearby";
     public static String API_fetchMySpa = "bookings/counts";
     public static String API_fetchMyDoctors = "bookings/counts";
+    public static String API_fetchMyBuddies = "mypet/";
 
     public static void setConfigs(Context context) {
         Resources resources = context.getResources();
