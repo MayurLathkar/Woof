@@ -1,6 +1,5 @@
 package com.example.dell.woof.ui;
 
-import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -48,6 +47,7 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
     private Location mLastLocation;
     private GoogleApiClient mGoogleApiClient;
     private Toolbar toolbar;
+    android.app.Fragment fragment = null;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private android.app.FragmentManager fragmentManager;
@@ -90,6 +90,7 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
 
     private void initializeAll(){
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        fragmentManager = getFragmentManager();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -105,6 +106,8 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         navigationView.setNavigationItemSelectedListener(this);
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvName)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserName());
         ((TextView) navigationView.getHeaderView(0).findViewById(R.id.tvEmail)).setText(WoofApplication.getWoofApplication().getCurrentUser().getUserEmail());
+        fragment = new HomeFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
     }
 
 
@@ -149,15 +152,16 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         //mLocationRequest.setSmallestDisplacement(0.1F); //1/10 meter
         if (mLastLocation != null)
         Toast.makeText(DashBoardActivity.this, " "+mLastLocation.getLatitude()+" "+mLastLocation.getLongitude(), Toast.LENGTH_SHORT).show();
-        fragmentManager = getFragmentManager();
         bundle = new Bundle();
         if (mLastLocation != null){
             bundle.putDouble("latitude", mLastLocation.getLatitude());
             bundle.putDouble("longitude", mLastLocation.getLongitude());
         }
-        Fragment fragment = new HomeFragment();
-        fragment.setArguments(bundle);
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        if (fragmentManager.findFragmentById(R.id.content_frame) instanceof HomeFragment){
+            fragment = new HomeFragment();
+            fragment.setArguments(bundle);
+            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        }
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
     }
@@ -173,10 +177,8 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
     }
 
 
-
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        android.app.Fragment fragment = null;
         Bundle bundle = new Bundle();
         switch (item.getItemId()){
             case R.id.home:
@@ -187,7 +189,6 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                     bundle.putDouble("longitude", mLastLocation.getLongitude());
                 }
                 fragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.profile:
                 toolbar.setTitle("My Profile");
@@ -197,32 +198,26 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                     bundle.putDouble("longitude", mLastLocation.getLongitude());
                 }
                 fragment.setArguments(bundle);
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.doctors:
                 toolbar.setTitle("My Doctors");
                 fragment = new DoctorsFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.kennel:
                 toolbar.setTitle("My Kennel");
                 fragment = new KennelFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.spa:
                 toolbar.setTitle("My Spa");
                 fragment = new SpaFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.store:
                 toolbar.setTitle("My Store");
                 fragment = new StoreFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.buddies:
                 toolbar.setTitle("My Buddies");
                 fragment = new MyBuddyFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.love:
                 toolbar.setTitle("My Love");
@@ -240,12 +235,10 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
             case R.id.feedback:
                 toolbar.setTitle("Feedback");
                 fragment = new FeedBackFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.legal:
                 toolbar.setTitle("Legal & About Us");
                 fragment = new LegalFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
                 break;
             case R.id.Logout:
                 WoofApplication.getWoofApplication().logout();
@@ -254,7 +247,28 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 finish();
                 break;
         }
-        drawerLayout.closeDrawer(GravityCompat.START);
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+        drawerLayout.closeDrawers();
         return true;
     }
 

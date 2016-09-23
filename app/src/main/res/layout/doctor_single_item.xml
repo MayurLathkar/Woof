@@ -35,38 +35,44 @@
                 android:layout_margin="5dp"
                 android:orientation="vertical"
                 android:id="@+id/linearLayout3">
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:weightSum="2"
+                    android:orientation="horizontal">
                     <TextView
                         android:id="@+id/doctorName"
                         android:padding="2dp"
-                        android:layout_width="wrap_content"
+                        android:layout_weight="1.3"
+                        android:layout_width="0dp"
+                        android:maxLines="1"
+                        android:ellipsize="marquee"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:text="Harrison Wells"
                         android:textSize="17sp"
                         android:textColor="@android:color/black"/>
-                    <ImageView
-                        android:id="@+id/cert"
-                        android:layout_width="15dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/certified"
-                        android:layout_toLeftOf="@+id/tvCert"
-                        android:layout_gravity="right" />
-                    <TextView
-                        android:id="@+id/tvCert"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="3dp"
-                        android:text="Certified"
-                        android:textColor="#46c704"
-                        android:textSize="12sp"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_alignParentEnd="true" />
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_weight="0.7"
+                        android:layout_width="0dp"
+                        android:layout_marginBottom="6dp"
+                        android:gravity="right|top"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:id="@+id/ivCert"
+                            android:layout_width="15dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/certified"/>
+                        <TextView
+                            android:layout_toRightOf="@+id/ivCert"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:textColor="#46c704"
+                            android:textSize="12sp"
+                            android:text="Certified"/>
+                    </RelativeLayout>
+                </LinearLayout>
                 <TextView
                     android:id="@+id/doctorAddress"
                     android:padding="2dp"

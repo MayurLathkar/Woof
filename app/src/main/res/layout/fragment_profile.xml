@@ -4,6 +4,7 @@
     android:background="#f0ebeb"
     android:layout_height="match_parent">
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -125,13 +126,22 @@
                         android:layout_height="wrap_content"
                         android:textColor="#b0b0b0"
                         android:text="Address"/>
+                    <ImageView
+                        android:id="@+id/getAddress"
+                        android:layout_margin="6dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/address"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignRight="@+id/address"
+                        android:layout_alignEnd="@+id/address"></ImageView>
                     <EditText
                         android:id="@+id/etAddress"
-                        android:layout_below="@+id/address"
+                        android:layout_below="@+id/getAddress"
                         android:background="@null"
                         android:padding="4dp"
                         android:textSize="14sp"
-                        android:maxLines="1"
+                        android:maxLines="2"
                         android:layout_marginBottom="4dp"
                         android:textColor="@android:color/black"
                         android:layout_width="match_parent"
@@ -226,19 +236,15 @@
                         android:layout_alignParentEnd="true" />
                 </RelativeLayout>
             </RelativeLayout>
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_below="@+id/rl3"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ButtonStyle"
+                android:text="Save"/>
         </RelativeLayout>
     </ScrollView>
-    <!--<Button-->
-        <!--android:id="@+id/btnSave"-->
-        <!--android:enabled="false"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="Save"-->
-        <!--android:layout_marginBottom="10dp"-->
-        <!--android:textColor="@android:color/white"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:alpha="0.6"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignRight="@+id/profile"-->
-        <!--android:layout_alignEnd="@+id/profile" />-->
 </RelativeLayout>

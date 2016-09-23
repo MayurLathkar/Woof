@@ -255,12 +255,9 @@
             <Button
                 android:id="@+id/btnDelete"
                 android:layout_width="match_parent"
-                android:drawingCacheQuality="high"
                 android:layout_height="wrap_content"
-                android:clickable="true"
-                android:textColor="@android:color/white"
                 android:text="Delete"
-                style="@style/Widget.AppCompat.Button.Colored"/>
+                style="@style/ButtonStyle"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>

@@ -19,9 +19,11 @@ import com.example.dell.woof.requests.FetchMyKennel;
 import com.example.dell.woof.requests.FetchMySpas;
 import com.example.dell.woof.requests.FetchMyStore;
 import com.example.dell.woof.requests.SaveDogDetailsRequest;
+import com.example.dell.woof.requests.SendFeedbackRequest;
 import com.example.dell.woof.requests.UserLoginRequest;
 import com.example.dell.woof.requests.UserSignUpRequest;
 import com.example.dell.woof.services.MyVolley;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -123,6 +125,17 @@ public class BaseRequestClass {
         Type type = new TypeToken<ArrayList<MyPet>>() {
         }.getType();
         final FetchMyBuddies<ArrayList<MyPet>> lRequest = new FetchMyBuddies<>(con, userId,type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static SendFeedbackRequest<JsonObject> sendUserFeedBack(Context con,
+                                                                   HashMap<String, String> params, Response
+                                                                        .Listener<JsonObject> listener, Response.ErrorListener errorListener){
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<JsonObject>() {
+        }.getType();
+        final SendFeedbackRequest<JsonObject> lRequest = new SendFeedbackRequest<>(con, params, type, listener, errorListener);
         queue.add(lRequest);
         return lRequest;
     }

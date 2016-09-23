@@ -57,10 +57,8 @@ public class MySpaListAdapter extends BaseAdapter {
     public View getView(final int i, View view, ViewGroup viewGroup) {
         view = View.inflate(context, R.layout.spa_single_item, null);
         ((TextView) view.findViewById(R.id.spaName)).setText(spasList.get(i).getSpa().getName());
-        ((TextView) view.findViewById(R.id.spaNumber)).setText(spasList.get(i).getSpa().getNumber());
-        ((TextView) view.findViewById(R.id.spaEmail)).setText(spasList.get(i).getSpa().getEmail());
-        ((TextView) view.findViewById(R.id.spaAddress)).setText(spasList.get(i).getSpa().getAddress());
-        ((TextView) view.findViewById(R.id.spaTime)).setText("Time: "+spasList.get(i).getSpa().getTiming());
+        ((TextView) view.findViewById(R.id.spaNumber)).setText("Contact: +91"+spasList.get(i).getSpa().getNumber());
+        ((TextView) view.findViewById(R.id.spaTime)).setText("Time: "+spasList.get(i).getSpa().getTiming()+" (Mon-Sat)");
         CircleImageView imageView = (CircleImageView) view.findViewById(R.id.spaImage);
         Picasso.with(context).load(spasList.get(i).getSpa().getImage()).into(imageView);
         view.setOnClickListener(new View.OnClickListener() {

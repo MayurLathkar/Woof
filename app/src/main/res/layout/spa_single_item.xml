@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v7.widget.CardView
@@ -10,70 +12,93 @@
         app:cardUseCompatPadding="true"
         app:cardBackgroundColor="@android:color/white"
         app:cardElevation="5dp"
-        app:contentPadding="15dp">
-        <RelativeLayout
+        app:contentPadding="10dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/spaImage"
-                android:layout_marginRight="10dp"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:src="@drawable/dog1"
                 android:layout_alignBottom="@+id/linearLayout3"
                 android:layout_alignParentTop="true" />
             <LinearLayout
-                android:layout_toRightOf="@+id/spaImage"
-                android:layout_width="match_parent"
+                android:layout_toRightOf="@+id/doctorImage"
+                android:layout_weight="1.4"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_margin="5dp"
                 android:orientation="vertical"
                 android:id="@+id/linearLayout3">
-                <TextView
-                    android:id="@+id/spaName"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="Harrison Wells"
-                    android:textAllCaps="true"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black"/>
+                    android:weightSum="2"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/spaName"
+                        android:padding="2dp"
+                        android:layout_weight="1.3"
+                        android:layout_width="0dp"
+                        android:maxLines="1"
+                        android:ellipsize="marquee"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Harrison Wells"
+                        android:textSize="17sp"
+                        android:textColor="@android:color/black"/>
+                    <TextView
+                        android:gravity="right"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.7"
+                        android:layout_height="match_parent"
+                        android:textColor="#46c704"
+                        android:textSize="12sp"
+                        android:text="Certified"/>
+                </LinearLayout>
                 <TextView
-                    android:id="@+id/spaEmail"
+                    android:id="@+id/spAddress"
+                    android:padding="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="harison@gmail.com"
-                    android:textColor="#808080"/>
-                <TextView
-                    android:id="@+id/spaNumber"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
-                    android:text="9845738473"
+                    android:text="Sony Center, Kalyan nagar, Bangalore"
+                    android:textSize="13sp"
+                    android:maxLines="2"
+                    android:ellipsize="marquee"
                     android:textColor="#808080"/>
                 <TextView
                     android:id="@+id/spaTime"
+                    android:padding="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Contacted at 12 Sep, 2016"
-                    android:textColor="#808080"/>
+                    android:layout_marginTop="2dp"
+                    android:textSize="13sp"
+                    android:textColor="#808080"
+                    android:text="Time: 9Am to 12Pm 6Pm to 9Pm(Mon-Sat)" />
                 <TextView
-                    android:id="@+id/spaAddress"
+                    android:id="@+id/spaNumber"
+                    android:padding="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Kalyan nagar, Bangalore"
-                    android:textColor="#808080"/>
+                    android:textSize="13sp"
+                    android:layout_marginTop="2dp"
+                    android:textColor="#808080"
+                    android:text="9845738473" />
+
                 <TextView
                     android:id="@+id/spaWebsite"
+                    android:padding="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="http://bangaloredoctors.com"
                     android:autoLink="web"
-                    android:textColor="#808080"/>
+                    android:textColor="@android:color/black"/>
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

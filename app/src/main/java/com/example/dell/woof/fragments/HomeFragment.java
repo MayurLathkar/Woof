@@ -92,6 +92,7 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+
     private void getNearByDoctors() {
         showProgressDialog("Getting doctors nearby you..");
         HashMap<String, Object> params = new HashMap<>();

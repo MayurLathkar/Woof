@@ -1,6 +1,7 @@
 package com.example.dell.woof.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -19,6 +20,7 @@ import com.example.dell.woof.WoofApplication;
 import com.example.dell.woof.adapters.MyDoctorsListAdapter;
 import com.example.dell.woof.model.MyDoctors;
 import com.example.dell.woof.ui.BaseRequestClass;
+import com.example.dell.woof.ui.CalenderActivity;
 import com.example.dell.woof.util.Util;
 import com.squareup.picasso.Picasso;
 
@@ -48,16 +50,29 @@ public class DoctorsFragment extends Fragment {
         clickListener = new MyDoctorsListAdapter.OnDoctorClickListener() {
             @Override
             public void onDoctorClick(View view, int position) {
-                mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                ImageView imageView = (ImageView) bottom_sheet.findViewById(R.id.doctorImage);
-                Picasso.with(getActivity()).load(myDoctorsList.get(position).getDoctor().getImage()).into(imageView);
-                ((TextView) bottom_sheet.findViewById(R.id.doctorName)).setText(myDoctorsList.get(position).getDoctor().getName());
-                ((TextView) bottom_sheet.findViewById(R.id.doctorAbout)).setText(myDoctorsList.get(position).getDoctor().getAbout());
+                setDoctorDetails(bottom_sheet, position);
+
             }
         };
         listView.setAdapter(adapter);
         getMyDoctors();
         return view;
+    }
+
+    private void setDoctorDetails(View bottom_sheet, final int position){
+        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        ImageView imageView = (ImageView) bottom_sheet.findViewById(R.id.doctorImage);
+        Picasso.with(getActivity()).load(myDoctorsList.get(position).getDoctor().getImage()).into(imageView);
+        ((TextView) bottom_sheet.findViewById(R.id.doctorName)).setText(myDoctorsList.get(position).getDoctor().getName());
+       // ((TextView) bottom_sheet.findViewById(R.id.doctorAbout)).setText(myDoctorsList.get(position).getDoctor().getAbout());
+        bottom_sheet.findViewById(R.id.btnBookApt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CalenderActivity.class);
+                intent.putExtra("doctor", myDoctorsList.get(position).getDoctor().getName());
+                getActivity().startActivity(intent);
+            }
+        });
     }
 
     private void getMyDoctors() {
