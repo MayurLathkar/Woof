@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/facility"
+            android:padding="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#b0b0b0"
+            android:text="FACILITIES"/>
+        <EditText
+            android:id="@+id/etFacility"
+            android:layout_below="@+id/facility"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kennel bed"
+            style="@style/EditTextStyle"/>
+        <View
+            android:layout_below="@+id/etFacility"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d3d3d3"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/fees"
+            android:padding="4dp"
+            android:paddingBottom="-10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#b0b0b0"
+            android:text="FEES"/>
+        <EditText
+            android:id="@+id/etFees"
+            android:layout_below="@+id/fees"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Consulting fee / per hr"
+            style="@style/EditTextStyle"/>
+        <View
+            android:layout_below="@+id/etFees"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d3d3d3"/>
+    </RelativeLayout>
+</LinearLayout>

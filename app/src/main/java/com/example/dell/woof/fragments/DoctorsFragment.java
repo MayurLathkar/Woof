@@ -46,7 +46,7 @@ public class DoctorsFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.listview);
         final View bottom_sheet = view.findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
-        adapter = new MyDoctorsListAdapter(getActivity(), myDoctorsList);
+//        adapter = new MyDoctorsListAdapter(getActivity(), myDoctorsList);
         clickListener = new MyDoctorsListAdapter.OnDoctorClickListener() {
             @Override
             public void onDoctorClick(View view, int position) {
@@ -54,7 +54,7 @@ public class DoctorsFragment extends Fragment {
 
             }
         };
-        listView.setAdapter(adapter);
+//        listView.setAdapter(adapter);
         getMyDoctors();
         return view;
     }

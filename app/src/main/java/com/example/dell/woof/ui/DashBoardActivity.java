@@ -28,7 +28,9 @@ import com.example.dell.woof.fragments.HomeFragment;
 import com.example.dell.woof.fragments.KennelFragment;
 import com.example.dell.woof.fragments.LegalFragment;
 import com.example.dell.woof.fragments.MyBuddyFragment;
+import com.example.dell.woof.fragments.MyLoveFragment;
 import com.example.dell.woof.fragments.MyProfileFragment;
+import com.example.dell.woof.fragments.PartnerWithUsFragment;
 import com.example.dell.woof.fragments.SpaFragment;
 import com.example.dell.woof.fragments.StoreFragment;
 import com.google.android.gms.common.ConnectionResult;
@@ -221,6 +223,7 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 break;
             case R.id.love:
                 toolbar.setTitle("My Love");
+                fragment = new MyLoveFragment();
                 break;
             case R.id.chatHistory:
                 toolbar.setTitle("My Chat");
@@ -231,6 +234,8 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
                 toolbar.setTitle("Add Dog");
                 break;
             case R.id.partner:
+                toolbar.setTitle("Partner With Us");
+                fragment = new PartnerWithUsFragment();
                 break;
             case R.id.feedback:
                 toolbar.setTitle("Feedback");

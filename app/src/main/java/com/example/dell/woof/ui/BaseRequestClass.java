@@ -8,6 +8,7 @@ import com.example.dell.woof.model.DoctorsDetails;
 import com.example.dell.woof.model.DogDetails;
 import com.example.dell.woof.model.MyDoctors;
 import com.example.dell.woof.model.MyKennel;
+import com.example.dell.woof.model.MyLove;
 import com.example.dell.woof.model.MyPet;
 import com.example.dell.woof.model.MySpas;
 import com.example.dell.woof.model.MyStore;
@@ -16,6 +17,7 @@ import com.example.dell.woof.requests.FetchDoctorsDetails;
 import com.example.dell.woof.requests.FetchMyBuddies;
 import com.example.dell.woof.requests.FetchMyDoctors;
 import com.example.dell.woof.requests.FetchMyKennel;
+import com.example.dell.woof.requests.FetchMyLove;
 import com.example.dell.woof.requests.FetchMySpas;
 import com.example.dell.woof.requests.FetchMyStore;
 import com.example.dell.woof.requests.SaveDogDetailsRequest;
@@ -136,6 +138,17 @@ public class BaseRequestClass {
         Type type = new TypeToken<JsonObject>() {
         }.getType();
         final SendFeedbackRequest<JsonObject> lRequest = new SendFeedbackRequest<>(con, params, type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static FetchMyLove<ArrayList<MyLove>> fetchMyLove(Context con,
+                                                      HashMap<String, String> params, Response
+                                                                           .Listener<ArrayList<MyLove>> listener, Response.ErrorListener errorListener){
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<ArrayList<MyLove>>() {
+        }.getType();
+        final FetchMyLove<ArrayList<MyLove>> lRequest = new FetchMyLove<>(con, params, type, listener, errorListener);
         queue.add(lRequest);
         return lRequest;
     }
