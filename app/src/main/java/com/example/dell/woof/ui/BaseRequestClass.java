@@ -13,6 +13,7 @@ import com.example.dell.woof.model.MyPet;
 import com.example.dell.woof.model.MySpas;
 import com.example.dell.woof.model.MyStore;
 import com.example.dell.woof.model.UserDetails;
+import com.example.dell.woof.requests.DeleteDogImage;
 import com.example.dell.woof.requests.FetchDoctorsDetails;
 import com.example.dell.woof.requests.FetchMyBuddies;
 import com.example.dell.woof.requests.FetchMyDoctors;
@@ -143,12 +144,23 @@ public class BaseRequestClass {
     }
 
     public static FetchMyLove<ArrayList<MyLove>> fetchMyLove(Context con,
-                                                      HashMap<String, String> params, Response
-                                                                           .Listener<ArrayList<MyLove>> listener, Response.ErrorListener errorListener){
+                                                              HashMap<String, String> params, Response
+                                                                      .Listener<ArrayList<MyLove>> listener, Response.ErrorListener errorListener){
         RequestQueue queue = MyVolley.getInstance().getRequestQueue();
         Type type = new TypeToken<ArrayList<MyLove>>() {
         }.getType();
         final FetchMyLove<ArrayList<MyLove>> lRequest = new FetchMyLove<>(con, params, type, listener, errorListener);
+        queue.add(lRequest);
+        return lRequest;
+    }
+
+    public static DeleteDogImage<JsonObject> deleteDogImage(Context con,
+                                                                String petId, HashMap<String, String> params, Response
+                                                                     .Listener<JsonObject> listener, Response.ErrorListener errorListener){
+        RequestQueue queue = MyVolley.getInstance().getRequestQueue();
+        Type type = new TypeToken<JsonObject>() {
+        }.getType();
+        final DeleteDogImage<JsonObject> lRequest = new DeleteDogImage<>(con, petId, params, type, listener, errorListener);
         queue.add(lRequest);
         return lRequest;
     }

@@ -86,4 +86,10 @@ public class MyLoveFragment extends Fragment {
 
         BaseRequestClass.fetchMyLove(getActivity(), params, listener, errorListener);
     }
+
+    @Override
+    public void onPause() {
+        Util.hideProgressDialog();
+        super.onPause();
+    }
 }

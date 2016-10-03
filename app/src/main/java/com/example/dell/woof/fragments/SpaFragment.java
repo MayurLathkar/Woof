@@ -51,8 +51,9 @@ public class SpaFragment extends Fragment {
             public void onSpaClick(View view, int position) {
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 ImageView imageView = (ImageView) bottomSheet.findViewById(R.id.spaImage);
+//                ((TextView) bottomSheet.findViewById(R.id.spaAbout)).setText(spasList.get(position).getSpa().getAbout());
                 ((TextView) bottomSheet.findViewById(R.id.spaName)).setText(spasList.get(position).getSpa().getName());
-                ((TextView) bottomSheet.findViewById(R.id.spaAbout)).setText(spasList.get(position).getSpa().getAbout());
+//                ((TextView) bottomSheet.findViewById(R.id.spaAbout)).setText(spasList.get(position).getSpa().getAbout());
                 Picasso.with(getActivity()).load(spasList.get(position).getSpa().getImage()).into(imageView);
             }
         };
@@ -73,7 +74,6 @@ public class SpaFragment extends Fragment {
                 adapter = new MySpaListAdapter(getActivity(), spasList);
                 adapter.setListener(clickListener);
                 listView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Success Spa", Toast.LENGTH_SHORT).show();
             }
         };
 
@@ -86,5 +86,11 @@ public class SpaFragment extends Fragment {
         };
 
         BaseRequestClass.fetchMySpas(getActivity(), params, listener, errorListener);
+    }
+
+    @Override
+    public void onPause() {
+        Util.hideProgressDialog();
+        super.onPause();
     }
 }

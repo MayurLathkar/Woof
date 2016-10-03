@@ -46,7 +46,6 @@ public class DoctorsFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.listview);
         final View bottom_sheet = view.findViewById(R.id.bottom_sheet);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet);
-//        adapter = new MyDoctorsListAdapter(getActivity(), myDoctorsList);
         clickListener = new MyDoctorsListAdapter.OnDoctorClickListener() {
             @Override
             public void onDoctorClick(View view, int position) {
@@ -54,7 +53,6 @@ public class DoctorsFragment extends Fragment {
 
             }
         };
-//        listView.setAdapter(adapter);
         getMyDoctors();
         return view;
     }
@@ -102,5 +100,11 @@ public class DoctorsFragment extends Fragment {
         };
 
         BaseRequestClass.fetchMyDoctors(getActivity(), params, listener, errorListener);
+    }
+
+    @Override
+    public void onPause() {
+        Util.hideProgressDialog();
+        super.onPause();
     }
 }

@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.example.dell.woof.adapters.MyKennelListAdapter;
 import com.example.dell.woof.R;
 import com.example.dell.woof.WoofApplication;
+import com.example.dell.woof.adapters.MyKennelListAdapter;
 import com.example.dell.woof.model.MyKennel;
 import com.example.dell.woof.ui.BaseRequestClass;
 import com.example.dell.woof.util.Util;
@@ -48,9 +48,9 @@ public class KennelFragment extends android.app.Fragment {
             @Override
             public void onSpaClick(View view, int position) {
                 mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                ImageView imageView = (ImageView) bottomSheet.findViewById(R.id.spaImage);
-                ((TextView) bottomSheet.findViewById(R.id.spaName)).setText(kennelList.get(position).getKennel().getName());
-                ((TextView) bottomSheet.findViewById(R.id.spaAbout)).setText(kennelList.get(position).getKennel().getAddress());
+                ImageView imageView = (ImageView) bottomSheet.findViewById(R.id.kennelImage);
+                ((TextView) bottomSheet.findViewById(R.id.kennelName)).setText(kennelList.get(position).getKennel().getName());
+                ((TextView) bottomSheet.findViewById(R.id.kennelAdd)).setText(kennelList.get(position).getKennel().getAddress());
                 Picasso.with(getActivity()).load(kennelList.get(position).getKennel().getImage()).into(imageView);
             }
         };
@@ -84,5 +84,11 @@ public class KennelFragment extends android.app.Fragment {
         };
 
         BaseRequestClass.fetchMyKennel(getActivity(), params, listener, errorListener);
+    }
+
+    @Override
+    public void onPause() {
+        Util.hideProgressDialog();
+        super.onPause();
     }
 }

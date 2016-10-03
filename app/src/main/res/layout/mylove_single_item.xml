@@ -61,7 +61,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginRight="15dp"
-                android:src="@drawable/like" />
+                android:src="@drawable/loved_spa" />
             <ImageView
                 android:id="@+id/chat"
                 android:layout_toRightOf="@id/liked"
@@ -74,7 +74,7 @@
                 android:layout_toRightOf="@id/chat"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/like"/>
+                android:src="@drawable/store"/>
             <TextView
                 android:id="@+id/count"
                 android:layout_width="25dp"

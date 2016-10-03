@@ -55,8 +55,7 @@ public class MyStoreListAdapter extends BaseAdapter {
         view = View.inflate(context, R.layout.store_single_item, null);
         ((TextView) view.findViewById(R.id.storeName)).setText(storeList.get(i).getStore().getName());
         ((TextView) view.findViewById(R.id.storeNumber)).setText(storeList.get(i).getStore().getNumber());
-        ((TextView) view.findViewById(R.id.storeEmail)).setText(storeList.get(i).getStore().getEmail());
-        ((TextView) view.findViewById(R.id.storeAddress)).setText(storeList.get(i).getStore().getAddress());
+        ((TextView) view.findViewById(R.id.storeAdd)).setText(storeList.get(i).getStore().getAddress());
         ((TextView) view.findViewById(R.id.storeTime)).setText("Time: "+storeList.get(i).getStore().getTiming());
         CircleImageView imageView = (CircleImageView) view.findViewById(R.id.storeImage);
         Picasso.with(context).load(storeList.get(i).getStore().getImage()).into(imageView);

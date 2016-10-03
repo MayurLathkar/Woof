@@ -373,6 +373,7 @@ public class DogProfileActivity extends BaseActivity implements View.OnClickList
         builder.setCancelable(false);
         final AlertDialog dialog = builder.create();
         Button cropDone = (Button) profilePicChangeView.findViewById(R.id.crop_done);
+
         mCropImageView = (CropImageView) profilePicChangeView.findViewById(R.id.CropImageView);
         mCropImageView.setImageUriAsync(imageUri);
         mCropImageView.setFixedAspectRatio(true);

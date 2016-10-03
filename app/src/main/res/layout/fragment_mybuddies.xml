@@ -119,34 +119,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textColor="#676767"
-                            android:text="ABOUT"/>
-                        <EditText
-                            android:id="@+id/etAbout"
-                            android:padding="2dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColorHint="#808080"
-                            android:textColor="#676767"
-                            android:maxLines="1"
-                            android:background="@null"
-                            android:textSize="14sp"
-                            android:hint="My Puppy..."/>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_marginTop="5dp"
-                            android:layout_height="1dp"
-                            android:background="#676767"></View>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="8dp"
-                        android:orientation="vertical">
-                        <TextView
-                            android:padding="2dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:textColor="#676767"
                             android:text="AGE"/>
                         <EditText
                             android:id="@+id/etAge"
@@ -215,7 +187,34 @@
                             android:background="@null"
                             android:textSize="14sp"
                             android:hint="Dog Breed"/>
-
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_height="1dp"
+                            android:background="#676767"></View>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:padding="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#676767"
+                            android:text="VACCINATION"/>
+                        <EditText
+                            android:id="@+id/etVac"
+                            android:padding="2dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColorHint="#808080"
+                            android:maxLines="1"
+                            android:textColor="#676767"
+                            android:background="@null"
+                            android:textSize="14sp"
+                            android:hint="Dog Vaccination"/>
                         <View
                             android:layout_width="match_parent"
                             android:layout_marginTop="5dp"
@@ -234,7 +233,7 @@
                             android:textColor="#676767"
                             android:text="ABOUT"/>
                         <EditText
-                            android:id="@+id/etVaccination"
+                            android:id="@+id/etAbout"
                             android:padding="2dp"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -257,6 +256,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Delete"
+                style="@style/ButtonStyle"/>
+            <Button
+                android:id="@+id/btnSave"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save"
                 style="@style/ButtonStyle"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

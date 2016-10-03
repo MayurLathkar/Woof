@@ -290,4 +290,12 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
         super.onStop();
         mGoogleApiClient.disconnect();
     }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawers();
+        else
+            super.onBackPressed();
+    }
 }

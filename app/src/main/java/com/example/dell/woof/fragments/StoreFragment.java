@@ -43,9 +43,7 @@ public class StoreFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_store, null);
         listView = (ListView) view.findViewById(R.id.listview);
         final View bottomSheet = view.findViewById(R.id.bottom_sheet);
-        getMyStore();
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
-        adapter = new MyStoreListAdapter(getActivity(), storeList);
         clickListener = new MyStoreListAdapter.OnStoreClickListener() {
             @Override
             public void onStoreClick(View view, int position) {
@@ -56,7 +54,7 @@ public class StoreFragment extends Fragment {
                 Picasso.with(getActivity()).load(storeList.get(position).getStore().getImage()).into(imageView);
             }
         };
-        listView.setAdapter(adapter);
+        getMyStore();
         return view;
     }
 
@@ -85,5 +83,11 @@ public class StoreFragment extends Fragment {
         };
 
         BaseRequestClass.fetchMyStore(getActivity(), params, listener, errorListener);
+    }
+
+    @Override
+    public void onPause() {
+        Util.hideProgressDialog();
+        super.onPause();
     }
 }

@@ -10,39 +10,90 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layoutMode="clipBounds"
+        android:background="@android:color/white"
         app:layout_anchorGravity="top"
         android:clipToPadding="true"
-        android:background="@android:color/holo_orange_light"
+        android:orientation="vertical"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:background="@drawable/image_gradient">
             <ImageView
                 android:id="@+id/spaImage"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/dog2"/>
-            <TextView
-                android:id="@+id/spaName"
-                android:padding="10dp"
+                android:src="@drawable/doctor"
+                android:scaleType="centerCrop"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:background="@drawable/image_gradient">
+            </View>
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
-                android:text="Buddy"/>
+                android:padding="10dp"
+                android:layout_gravity="bottom">
+                <TextView
+                    android:id="@+id/spaName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="marquee"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@android:color/white"
+                    android:textSize="38sp"
+                    android:text="Puppy Pets"/>
+                <LinearLayout
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@+id/spaName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/spaAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingExtra="3dp"
+                        android:text="1st cross, Near Sony Center, Kalyan nagar, \nBangalore 560043\n+919856473423"
+                        android:textColor="@color/white"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </FrameLayout>
+        <TextView
+            android:paddingTop="20dp"
+            android:paddingLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#696969"
+            android:textSize="20sp"
+            android:text="About"/>
+        <ScrollView
+            android:layout_weight="0.9"
+            android:padding="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
             <TextView
                 android:id="@+id/spaAbout"
-                android:padding="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#808080"
-                android:text="One of the most significant changes to Android design was introduced during the 2014 Google I/O conference, material design. Even though Google had introduced a set of guidelines for their new design philosophy, developers were responsible for implementing the new patterns from scratch"/>
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+                android:layout_height="0dp"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo."
+               />
+        </ScrollView>
+        <Button
+            android:id="@+id/btnBookApt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Book Appointment -->"
+            android:textAllCaps="false"
+            style="@style/ButtonStyle"/>
+    </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

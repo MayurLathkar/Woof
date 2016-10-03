@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +39,7 @@ public class MyBuddyFragment extends Fragment implements View.OnClickListener{
     private List<MyPet> buddyList = new ArrayList<>();
     private MyBuddiesListAdapter adapter;
     private ListView listView;
+    private View bottomSheet;
     private BottomSheetBehavior mBottomSheetBehavior;
     private MyBuddiesListAdapter.OnBuddiesClickListener onBuddiesClickListener;
     private RecyclerView recyclerView;
@@ -50,20 +53,20 @@ public class MyBuddyFragment extends Fragment implements View.OnClickListener{
         LinearLayoutManager manager = new LinearLayoutManager(getActivity());
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView.setLayoutManager(manager);
-        final View bottomSheet = view.findViewById(R.id.bottom_sheet);
+        bottomSheet = view.findViewById(R.id.bottom_sheet);
         adapter = new MyBuddiesListAdapter(getActivity(), buddyList);
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet);
         onBuddiesClickListener = new MyBuddiesListAdapter.OnBuddiesClickListener() {
             @Override
             public void onBuddyClick(View view, int position) {
-                setDataToBottomShit(bottomSheet, position);
+                setDataToBottomShit(position);
             }
         };
         getMyBuddies();
         return view;
     }
 
-    private void setDataToBottomShit(View bottomSheet, int position){
+    private void setDataToBottomShit(int position){
         mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         ImageView imageView = (ImageView) bottomSheet.findViewById(R.id.petImage);
         ((TextView) bottomSheet.findViewById(R.id.dogName)).setText(buddyList.get(position).getName());
@@ -74,22 +77,52 @@ public class MyBuddyFragment extends Fragment implements View.OnClickListener{
         ((EditText) bottomSheet.findViewById(R.id.etAge)).setText(buddyList.get(position).getAge());
         ((EditText) bottomSheet.findViewById(R.id.etGender)).setText(buddyList.get(position).getGender());
         ((EditText) bottomSheet.findViewById(R.id.etDogBreed)).setText(buddyList.get(position).getBreed());
+//        if (buddyList.get(position).getVaccinations() != null)
+//            ((EditText) bottomSheet.findViewById(R.id.etVac)).setText(buddyList.get(position).getVaccinations()[0]);
         bottomSheet.findViewById(R.id.btnDelete).setOnClickListener(this);
-        DogProfileAdapter profileAdapter = new DogProfileAdapter(getActivity(), buddyList.get(position).getPetImages());
+        DogProfileAdapter profileAdapter = new DogProfileAdapter(getActivity(), buddyList.get(position).getId(), buddyList.get(position).getPetImages());
         recyclerView.setAdapter(profileAdapter);
         Picasso.with(getActivity()).load(buddyList.get(position).getPetImages()[0]).into(imageView);
+
+        ((EditText) bottomSheet.findViewById(R.id.etDogName)).addTextChangedListener(textWatcher);
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            bottomSheet.findViewById(R.id.btnDelete).setVisibility(View.GONE);
+            bottomSheet.findViewById(R.id.btnSave).setVisibility(View.VISIBLE);
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+
+        }
+    };
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnDelete:
                 deleteDog();
+                break;
+            case R.id.btnSave:
+                updateDog();
+                break;
         }
     }
 
     private void deleteDog(){
         Toast.makeText(getActivity(), "Delete dog", Toast.LENGTH_SHORT).show();
+    }
+
+    private void updateDog(){
+        Toast.makeText(getActivity(), "Details Saved", Toast.LENGTH_SHORT).show();
     }
 
     private void getMyBuddies(){
@@ -114,5 +147,11 @@ public class MyBuddyFragment extends Fragment implements View.OnClickListener{
         };
 
         BaseRequestClass.fetchMyBuddies(getActivity(), WoofApplication.getWoofApplication().getCurrentUser().getUserID(), listener, errorListener);
+    }
+
+    @Override
+    public void onPause() {
+        Util.hideProgressDialog();
+        super.onPause();
     }
 }
