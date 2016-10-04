@@ -228,11 +228,6 @@ public class DashBoardActivity extends BaseActivity implements GoogleApiClient.C
             case R.id.chatHistory:
                 toolbar.setTitle("My Chat");
                 break;
-            case R.id.chatLocation:
-                break;
-            case R.id.addDog:
-                toolbar.setTitle("Add Dog");
-                break;
             case R.id.partner:
                 toolbar.setTitle("Partner With Us");
                 fragment = new PartnerWithUsFragment();

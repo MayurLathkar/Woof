@@ -39,7 +39,7 @@ public class PartnerWithUsFragment extends Fragment implements View.OnClickListe
 
     private void intializeAll(final View view){
         webView = (WebView) view.findViewById(R.id.webView);
-        startWebView("http://www.google.com");
+        startWebView("http://54.169.84.107/form-boot/index.php");
 //        name = (EditText) view.findViewById(R.id.etName);
 //        email = (EditText) view.findViewById(R.id.etEmail);
 //        mobile = (EditText) view.findViewById(R.id.etMobile);

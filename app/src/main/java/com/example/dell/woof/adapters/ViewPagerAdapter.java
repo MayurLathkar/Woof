@@ -32,7 +32,10 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return productArrayList.size();
+        if (productArrayList.size() > 0)
+            return productArrayList.size();
+        else
+            return 5;
     }
 
     @Override
@@ -45,10 +48,13 @@ public class ViewPagerAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.view_blue, container, false);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
         Bitmap icon = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.small_foot);
-        if (productArrayList.get(position) == icon)
-            Picasso.with(mContext).load(R.drawable.small_foot).resize(itemView.getWidth(), 400).placeholder(R.drawable.small_foot).into(imageView);
-        else
-            imageView.setImageBitmap(productArrayList.get(position));
+        if (productArrayList.size() > 0){
+            if (productArrayList.get(position) == icon)
+                Picasso.with(mContext).load(R.drawable.small_foot).resize(itemView.getWidth(), 400).placeholder(R.drawable.small_foot).into(imageView);
+            else
+                imageView.setImageBitmap(productArrayList.get(position));
+        }
+
         container.addView(itemView);
         return itemView;
     }

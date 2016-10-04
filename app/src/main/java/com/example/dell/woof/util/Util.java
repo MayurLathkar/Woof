@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Parcelable;
@@ -28,6 +30,7 @@ import java.util.List;
 public class Util {
 
     public static ProgressDialog mProgressDialog = null;
+    private static ConnectivityManager mCM;
 
     public static boolean checkLocationServices(Context context) {
         final LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -199,4 +202,13 @@ public class Util {
             mProgressDialog.dismiss();
     }
 
+    public static boolean checkNetworkConnection(Context context){
+        if (mCM == null) {
+            mCM = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        }
+        NetworkInfo networkInfo = mCM.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnectedOrConnecting())
+            return true;
+        return false;
+    }
 }

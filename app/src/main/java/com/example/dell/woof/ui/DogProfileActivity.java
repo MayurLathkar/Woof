@@ -11,19 +11,21 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -41,6 +43,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * Created by praful on 14/8/16.
  */
@@ -49,7 +53,7 @@ public class DogProfileActivity extends BaseActivity implements View.OnClickList
     private ViewPager viewPager;
     private ImageView uploadVaccination;
     private Button btnContinue;
-    private ImageView image1, image2, image3, image4, image5;
+    private CircleImageView image1, image2, image3, image4, image5;
     private List<String> vaccinationBase64 = new ArrayList<>();
     private CropImageView mCropImageView;
     private Uri mCropImageUri;
@@ -59,7 +63,9 @@ public class DogProfileActivity extends BaseActivity implements View.OnClickList
     private ViewPagerAdapter viewPagerAdapter;
     private RecyclerView dogsProfiles;
     private DogProfileAdapter profileAdapter;
-    private Spinner gender, age;
+    private TextView gender, age;
+    private RadioGroup radioGroup;
+    private FloatingActionButton cameraButton;
     private List<Bitmap> dogImageList = new ArrayList<>();
 
     @Override
@@ -71,8 +77,12 @@ public class DogProfileActivity extends BaseActivity implements View.OnClickList
     }
 
     private void setSpinnerItems(){
-        gender = (Spinner) findViewById(R.id.spinner1);
-        age = (Spinner) findViewById(R.id.spinner2);
+        gender = (TextView) findViewById(R.id.gender);
+        age = (TextView) findViewById(R.id.age);
+        cameraButton = (FloatingActionButton) findViewById(R.id.btnCamera);
+        gender.setOnClickListener(this);
+        age.setOnClickListener(this);
+        cameraButton.setOnClickListener(this);
         final ArrayList<String> genders = new ArrayList<>();
         final ArrayList<String> ages = new ArrayList<>(Arrays.asList("AGE","1","2","3","4","5","6","7","8","9","10","11","12"));
         genders.add("GENDER");
@@ -80,47 +90,48 @@ public class DogProfileActivity extends BaseActivity implements View.OnClickList
         genders.add("Female");
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, genders);
         ArrayAdapter<String> ageAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_activated_1, ages);
-        gender.setAdapter(genderAdapter);
-        age.setAdapter(ageAdapter);
-        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position != 0){
-                    genderSelectedTrue = true;
-                    params.put("gender", genders.get(position).toString());
-                } else
-                    genderSelectedTrue = false;
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-       age.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-           public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-               if (position != 0){
-                   ageSelectedTrue = true;
-                   params.put("age", Integer.valueOf(ages.get(position)));
-               } else
-                    ageSelectedTrue = false;
-           }
-
-           @Override
-           public void onNothingSelected(AdapterView<?> adapterView) {
-
-           }
-       });
+//        gender.setAdapter(genderAdapter);
+//        age.setAdapter(ageAdapter);
+//        gender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+//                if (position != 0){
+//                    genderSelectedTrue = true;
+//                    params.put("gender", genders.get(position).toString());
+//                } else
+//                    genderSelectedTrue = false;
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+//
+//       age.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//           @Override
+//           public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+//               if (position != 0){
+//                   ageSelectedTrue = true;
+//                   params.put("age", Integer.valueOf(ages.get(position)));
+//               } else
+//                    ageSelectedTrue = false;
+//           }
+//
+//           @Override
+//           public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//           }
+//       });
     }
 
     private void intializeAll(){
-        image1 = (ImageView) findViewById(R.id.image1);
-        image2 = (ImageView) findViewById(R.id.image2);
-        image3 = (ImageView) findViewById(R.id.image3);
-        image4 = (ImageView) findViewById(R.id.image4);
-        image5 = (ImageView) findViewById(R.id.image5);
+        image1 = (CircleImageView) findViewById(R.id.image1);
+        image2 = (CircleImageView) findViewById(R.id.image2);
+        image3 = (CircleImageView) findViewById(R.id.image3);
+        image4 = (CircleImageView) findViewById(R.id.image4);
+        image5 = (CircleImageView) findViewById(R.id.image5);
         image1.setOnClickListener(this);
         image2.setOnClickListener(this);
         image3.setOnClickListener(this);
@@ -149,7 +160,7 @@ public class DogProfileActivity extends BaseActivity implements View.OnClickList
             }
         });
         onPageChanged(0);
-        Switch button = (Switch) findViewById(R.id.btnSwitch);
+        Switch button = (Switch) findViewById(R.id.swtNoPuppy);
         button.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -212,11 +223,70 @@ public class DogProfileActivity extends BaseActivity implements View.OnClickList
                 viewPager.setCurrentItem(4);
                 onLoadImageClick(view, 4);
                 break;
+            case R.id.btnCamera:
+                onLoadImageClick(view, 5);
+                break;
             case R.id.btnContinue:
                 saveDogDetails();
                 break;
-
+            case R.id.gender:
+                openDialogForAgeOrGender("Gender");
+                break;
+            case R.id.age:
+                openDialogForAgeOrGender("Age");
+                break;
         }
+    }
+
+    private void openDialogForAgeOrGender(String type){
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View alertDialogView;
+        final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setCancelable(false);
+        if (type.equals("Gender")){
+            alertDialogView = inflater.inflate(R.layout.dailog_gender_selection, null);
+            radioGroup = (RadioGroup) alertDialogView.findViewById(R.id.radioGroup);
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    if (i == R.id.radMale){
+                        params.put("gender", "male");
+                        gender.setText("Male");
+                    }
+                    else {
+                        params.put("gender", "female");
+                        gender.setText("Female");
+                    }
+                }
+            });
+            alertDialogView.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+        }
+
+        else {
+            alertDialogView = inflater.inflate(R.layout.dailog_age_selection, null);
+            radioGroup = (RadioGroup) alertDialogView.findViewById(R.id.radioGroup);
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    RadioButton radioButton = (RadioButton) alertDialogView.findViewById(radioGroup.getCheckedRadioButtonId());
+                    age.setText(radioButton.getText().toString());
+                    radioGroup.getTag();
+                }
+            });
+            alertDialogView.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    alertDialog.dismiss();
+                }
+            });
+        }
+        alertDialog.setView(alertDialogView);
+        alertDialog.show();
     }
 
     private void saveDogDetails(){

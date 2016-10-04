@@ -26,10 +26,9 @@
             android:background="@drawable/image_gradient">
             <ImageView
                 android:id="@+id/kennelImage"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="250dp"
-                android:src="@drawable/doctor"
-                android:scaleType="centerCrop"/>
+                android:scaleType="fitXY"/>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="250dp"

@@ -71,7 +71,6 @@ public class KennelFragment extends android.app.Fragment {
                 adapter = new MyKennelListAdapter(getActivity(), kennelList);
                 adapter.setListener(onKennelClickListener);
                 listView.setAdapter(adapter);
-                Toast.makeText(getActivity(), "Success Kennel", Toast.LENGTH_SHORT).show();
             }
         };
 
