@@ -208,7 +208,4 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
             Toast.makeText(LoginActivity.this, "Problem in login with google", Toast.LENGTH_SHORT).show();
         }
     }
-    //String profile_name=object.getString("name");
-    //long fb_id=object.getLong("id"); //use this for logout
-    //Start new activity or use this info in your project.
 }

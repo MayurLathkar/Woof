@@ -27,10 +27,14 @@
                 android:layout_weight="1">
                 <ImageView
                     android:id="@+id/petImage"
-                    android:layout_width="match_parent"
+                    android:layout_width="fill_parent"
                     android:layout_height="match_parent"
                     android:foreground="@drawable/image_gradient"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="fitXY"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/image_gradient"></View>
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -127,6 +131,9 @@
                             android:layout_height="wrap_content"
                             android:textColorHint="#808080"
                             android:textColor="#676767"
+                            android:inputType="number"
+                            android:digits="1234567890"
+                            android:maxLength="2"
                             android:maxLines="1"
                             android:background="@null"
                             android:textSize="14sp"
